@@ -17,3 +17,8 @@ services:
       - '$PWD/config:/etc/gitlab'
       - '$PWD/logs:/var/log/gitlab'
       - '$PWD/data:/var/opt/gitlab'
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "20m"
+          max-file: "5"
