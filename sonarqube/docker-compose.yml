@@ -62,6 +62,3 @@ services:
 networks:
   sonarnet:
     driver: bridge
-
-volumes:
-  postgresql_data:
