@@ -1,0 +1,16 @@
+#gitlab
+gitlab/config
+gitlab/data
+gitlab/logs
+#grafana
+grafana-stack/grafana
+grafana-stack/influxdb
+#sonarqube
+sonarqube/sonarqube_conf
+sonarqube/sonarqube_data
+sonarqube/sonarqube_extensions
+sonarqube/sonarqube_bundled-plugins
+sonarqube/postgresql
+sonarqube/postgresql_data
+#sqlserver
+sqlserver/mssql

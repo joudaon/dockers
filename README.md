@@ -26,3 +26,14 @@ View output from containers.
 $ docker-compose logs
 $ docker-compose logs -f #View output from containers.
 ```
+
+Stop and remove all docker containers
+```sh
+$ docker stop $(docker ps -a -q)
+$ docker rm $(docker ps -a -q)
+```
+
+Remove all docker images
+```sh
+$ docker rmi $(docker images -q)
+```
