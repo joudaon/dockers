@@ -1,0 +1,2 @@
+Default gitlab username: root
+More info: https://docs.gitlab.com/omnibus/docker/README.html
