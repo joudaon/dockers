@@ -17,8 +17,148 @@
   "gnetId": 9964,
   "graphTooltip": 0,
   "id": 5,
+  "iteration": 1556281955689,
   "links": [],
   "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 27,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "6.1.4",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "project_name"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "jenkins_data",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "build_result"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "build_result",
+              "operator": "=~",
+              "value": "/^$build_result$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Build Status History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
     {
       "aliasColors": {},
       "bars": false,
@@ -27,9 +167,9 @@
       "decimals": null,
       "fill": 1,
       "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
+        "h": 7,
+        "w": 12,
+        "x": 12,
         "y": 0
       },
       "id": 25,
@@ -41,7 +181,7 @@
         "hideZero": false,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "total": true,
         "values": true
@@ -155,7 +295,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 7
       },
       "id": 23,
       "legend": {
@@ -295,7 +435,7 @@
         "h": 7,
         "w": 4,
         "x": 0,
-        "y": 14
+        "y": 13
       },
       "id": 12,
       "interval": null,
@@ -366,7 +506,7 @@
         "h": 7,
         "w": 16,
         "x": 4,
-        "y": 14
+        "y": 13
       },
       "id": 4,
       "isNew": true,
@@ -466,7 +606,7 @@
         "h": 7,
         "w": 4,
         "x": 20,
-        "y": 14
+        "y": 13
       },
       "id": 13,
       "interval": null,
@@ -548,7 +688,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 21
+        "y": 20
       },
       "id": 7,
       "interval": null,
@@ -633,7 +773,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 21
+        "y": 20
       },
       "id": 15,
       "interval": null,
@@ -718,7 +858,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 21
+        "y": 20
       },
       "id": 8,
       "interval": null,
@@ -809,7 +949,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 21
+        "y": 20
       },
       "id": 16,
       "interval": null,
@@ -895,7 +1035,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 21
+        "y": 20
       },
       "id": 10,
       "interval": null,
@@ -975,7 +1115,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 21
+        "y": 20
       },
       "id": 5,
       "interval": null,
@@ -1061,7 +1201,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 25
+        "y": 24
       },
       "id": 18,
       "interval": null,
@@ -1147,7 +1287,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 25
+        "y": 24
       },
       "id": 9,
       "interval": null,
@@ -1233,7 +1373,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 25
+        "y": 24
       },
       "id": 20,
       "interval": null,
@@ -1320,7 +1460,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 25
+        "y": 24
       },
       "id": 6,
       "interval": null,
@@ -1406,7 +1546,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 25
+        "y": 24
       },
       "id": 17,
       "interval": null,
@@ -1491,7 +1631,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 25
+        "y": 24
       },
       "id": 11,
       "interval": null,
@@ -1575,7 +1715,7 @@
         "h": 7,
         "w": 4,
         "x": 0,
-        "y": 29
+        "y": 28
       },
       "height": "",
       "id": 2,
@@ -1649,7 +1789,7 @@
         "h": 7,
         "w": 8,
         "x": 4,
-        "y": 29
+        "y": 28
       },
       "id": 1,
       "isNew": true,
@@ -1743,7 +1883,7 @@
         "h": 7,
         "w": 8,
         "x": 12,
-        "y": 29
+        "y": 28
       },
       "id": 21,
       "isNew": true,
@@ -1848,7 +1988,7 @@
         "h": 7,
         "w": 4,
         "x": 20,
-        "y": 29
+        "y": 28
       },
       "height": "",
       "id": 3,
@@ -1912,10 +2052,36 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": "SUCCESS",
+          "value": "SUCCESS"
+        },
+        "datasource": "InfluxDB",
+        "definition": "show tag values with key = \"build_result\"",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "build_result",
+        "options": [],
+        "query": "show tag values with key = \"build_result\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -1946,5 +2112,5 @@
   "timezone": "browser",
   "title": "Jenkins: Performance and Health Overview",
   "uid": "haryan-jenkins",
-  "version": 14
+  "version": 30
 }
