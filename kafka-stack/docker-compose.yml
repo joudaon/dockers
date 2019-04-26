@@ -1,0 +1,40 @@
+version: '2.3'
+services:
+
+  zookeeper:
+    image: zookeeper:latest
+    container_name: zookeeper
+    hostname: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=zookeeper:2888:3888
+    volumes:
+      - ./zk-single-kafka-single/zookeeper/data:/data
+      - ./zk-single-kafka-single/zookeeper/datalog:/datalog
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    container_name: kafka
+    hostname: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      # KAFKA_ADVERTISED_HOST_NAME: your host ip
+      KAFKA_ADVERTISED_HOST_NAME: <hostip>
+      KAFKA_CREATE_TOPICS: "topic1:1:1,topic2:1:1:compact"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ./zk-single-kafka-single/kafka/data:/var/lib/kafka/data
+    healthcheck:
+      test: "kafka-topics.sh --zookeeper zookeeper:2181 --list 2>&1 | grep \"topic1\""
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - zookeeper

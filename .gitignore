@@ -5,6 +5,8 @@ gitlab/logs
 #grafana
 grafana-stack/grafana
 grafana-stack/influxdb
+#kafka-stack
+kafka-stack/zk-single-kafka-single
 #sonarqube
 sonarqube/sonarqube_conf
 sonarqube/sonarqube_data
