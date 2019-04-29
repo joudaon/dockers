@@ -78,7 +78,7 @@ services:
     environment:
       - GF_SERVER_ROOT_URL=https://grafana.example.com
       - GF_SECURITY_ADMIN_PASSWORD=Password1234!
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-worldmap-panel,raintank-worldping-app,jdbranham-diagram-panel
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-worldmap-panel,raintank-worldping-app,jdbranham-diagram-panel,grafana-piechart-panel
       - GF_USERS_ALLOW_SIGN_UP=false
       - GF_SECURITY_DISABLE_GRAVATAR=true
       - GF_SERVER_DOMAIN=example.com
