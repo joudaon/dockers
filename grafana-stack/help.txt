@@ -11,6 +11,7 @@ influxdb
 8165 - VMware vSphere - Hosts
 8168 - VMware vSphere - VMs
 8162 - VMware vSphere - Datastore
+9386 - SQL Servers
 ----------
 prometheus
 ----------
