@@ -12,6 +12,7 @@ influxdb
 8168 - VMware vSphere - VMs
 8162 - VMware vSphere - Datastore
 9386 - SQL Servers
+4730 - SQL Server Monitoring
 ----------
 prometheus
 ----------
@@ -37,3 +38,4 @@ Useful links
 - En busca del Dashboard perfecto: InfluxDB, Telegraf y Grafana – Parte XII – Plugin nativo de Telegraf para vSphere: https://www.jorgedelacruz.es/2018/10/01/en-busca-del-dashboard-perfecto-influxdb-telegraf-y-grafana-parte-xii-plugin-nativo-de-telegraf-para-vsphere/
 - En busca del Dashboard perfecto: InfluxDB, Telegraf y Grafana – Parte XV – Monitorización IPMI de nuestros Hosts ESXi: https://www.jorgedelacruz.es/2019/04/01/en-busca-del-dashboard-perfecto-influxdb-telegraf-y-grafana-parte-xv-monitorizacion-ipmi-de-nuestros-hosts-esxi/
 - Telegraf github site: https://github.com/influxdata/telegraf
+- Not able to get the metrics after enabling sqlserver input: https://github.com/influxdata/telegraf/issues/5289

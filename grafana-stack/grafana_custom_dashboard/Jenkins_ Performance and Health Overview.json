@@ -17,7 +17,7 @@
   "gnetId": 9964,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1556281955689,
+  "iteration": 1557933403479,
   "links": [],
   "panels": [
     {
@@ -26,14 +26,15 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "fill": 1,
+      "fill": 0,
       "gridPos": {
-        "h": 7,
+        "h": 6,
         "w": 12,
         "x": 0,
         "y": 0
       },
       "id": 27,
+      "interval": "",
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -45,13 +46,153 @@
         "total": false,
         "values": false
       },
-      "lines": true,
-      "linewidth": 1,
+      "lines": false,
+      "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
       "pluginVersion": "6.1.4",
-      "pointradius": 2,
+      "pointradius": 3,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "$tag_project_name",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "project_name"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "jenkins_data",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "build_result"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "build_result",
+              "operator": "=~",
+              "value": "/^$build_result$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Build Status History ($build_result)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 28,
+      "interval": "",
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "6.1.4",
+      "pointradius": 3,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
@@ -60,7 +201,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "",
+          "alias": "$tag_project_name",
           "groupBy": [
             {
               "params": [
@@ -121,19 +262,21 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Build Status History",
+      "title": "Build Status History Count  ($build_result)",
       "tooltip": {
-        "shared": true,
+        "shared": false,
         "sort": 0,
         "value_type": "individual"
       },
       "type": "graph",
       "xaxis": {
         "buckets": null,
-        "mode": "time",
+        "mode": "series",
         "name": null,
         "show": true,
-        "values": []
+        "values": [
+          "total"
+        ]
       },
       "yaxes": [
         {
@@ -169,8 +312,8 @@
       "gridPos": {
         "h": 7,
         "w": 12,
-        "x": 12,
-        "y": 0
+        "x": 0,
+        "y": 6
       },
       "id": 25,
       "legend": {
@@ -200,6 +343,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "alias": "$tag_project_name",
           "groupBy": [
             {
               "params": [
@@ -292,10 +436,10 @@
       "dashes": false,
       "fill": 5,
       "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 7
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 6
       },
       "id": 23,
       "legend": {
@@ -324,6 +468,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "alias": "$tag_project_name",
           "groupBy": [
             {
               "params": [
@@ -376,7 +521,6 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -2056,8 +2200,9 @@
       {
         "allValue": null,
         "current": {
-          "text": "SUCCESS",
-          "value": "SUCCESS"
+          "tags": [],
+          "text": "FAILURE",
+          "value": "FAILURE"
         },
         "datasource": "InfluxDB",
         "definition": "show tag values with key = \"build_result\"",
@@ -2112,5 +2257,5 @@
   "timezone": "browser",
   "title": "Jenkins: Performance and Health Overview",
   "uid": "haryan-jenkins",
-  "version": 30
+  "version": 43
 }
