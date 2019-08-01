@@ -5,7 +5,7 @@ services:
     image: sonarqube:7.6-community
     container_name: sonarqube
     hostname: sonarqube
-    mem_limit: 2048m     
+    mem_limit: 2048m
     ports:      
       - "9000:9000"                                
     networks:      
