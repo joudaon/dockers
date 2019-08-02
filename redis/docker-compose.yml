@@ -1,0 +1,18 @@
+version: '2.3'
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: redis
+    hostname: redis
+    mem_limit: 1024m
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - ./data:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"

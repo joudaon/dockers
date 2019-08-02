@@ -7,6 +7,8 @@ grafana-stack/grafana
 grafana-stack/influxdb
 #kafka-stack
 kafka-stack/zk-single-kafka-single
+#redis
+redis/data
 #sonarqube
 sonarqube/sonarqube_conf
 sonarqube/sonarqube_data
