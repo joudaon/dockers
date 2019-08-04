@@ -1,0 +1,14 @@
+version: '2.3'
+services:
+
+  mysql:
+    image: jenkins/jenkins:latest
+    container_name: jenkins
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - '80:8080'
+      - '443:8443'
+      - '50000:50000' #build executors port
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
