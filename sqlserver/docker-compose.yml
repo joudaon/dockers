@@ -2,7 +2,8 @@ version: '2.3'
 
 services:
   sql-server:
-    image: microsoft/mssql-server-linux:2017-CU13
+    # image: microsoft/mssql-server-linux:2017-CU13
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     container_name: sqlserver
     hostname: sqlserver
     mem_limit: 2048m
