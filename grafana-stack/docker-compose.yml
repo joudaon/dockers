@@ -100,10 +100,3 @@ services:
 networks:
   grafana_network:
     driver: bridge
-
-  
-
-
-
-
-
