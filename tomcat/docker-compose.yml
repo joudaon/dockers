@@ -1,0 +1,13 @@
+version: '2.3'
+services:
+
+  tomcat: 
+    image: tomcat:latest
+    container_name: tomcat
+    mem_limit: 2048m
+    restart: always
+    # volumes:
+    #   - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8080:8080
+
