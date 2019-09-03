@@ -1,0 +1,18 @@
+version: "2"
+
+services:
+
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    hostname: portainer
+    mem_limit: 2048m
+    restart: always
+    ports: 
+      - 9000:9000
+    environment:
+      - VIRTUAL_HOST=dev.portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer_data:/data
+      - ./portainer:/portainer
