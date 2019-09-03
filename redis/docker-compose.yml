@@ -6,9 +6,9 @@ services:
     container_name: redis
     hostname: redis
     mem_limit: 1024m
+    restart: always
     ports:
       - "6379:6379"
-    restart: always
     volumes:
       - ./data:/data
     logging:
