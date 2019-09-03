@@ -6,6 +6,7 @@ services:
     container_name: zookeeper
     hostname: zookeeper
     mem_limit: 1024m
+    restart: always
     ports:
       - "2181:2181"
     volumes:
@@ -17,6 +18,7 @@ services:
     container_name: kafka
     hostname: kafka
     mem_limit: 1024m
+    restart: always
     ports:
       - "9092:9092"
     environment:
