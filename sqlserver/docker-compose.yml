@@ -7,6 +7,7 @@ services:
     container_name: sqlserver
     hostname: sqlserver
     mem_limit: 2048m
+    restart: always
     ports:
       - 1433:1433
     environment:
