@@ -14,7 +14,7 @@ services:
       - ./storeddata/zookeeper/data:/data
       - ./storeddata/zookeeper/datalog:/datalog
     networks:
-      - pandanet
+      - mynet
 
   namenode:
     image: bde2020/hadoop-namenode:${NAMENODE_VERSION}
@@ -31,7 +31,7 @@ services:
     ports:
       - 50070:50070
     networks:
-      - pandanet
+      - mynet
 
   datanode:
     image: bde2020/hadoop-datanode:${DATANODE_VERSION}
@@ -48,7 +48,7 @@ services:
     ports:
       - 50075:50075
     networks:
-      - pandanet
+      - mynet
 
   hbase-master:
     image: bde2020/hbase-master:${HBASEMASTER_VERSION}
@@ -63,7 +63,7 @@ services:
     ports:
       - 16010:16010
     networks:
-      - pandanet
+      - mynet
 
   hbase-regionserver:
     image: bde2020/hbase-regionserver:${HBASEREGION_VERSION}
@@ -79,7 +79,7 @@ services:
     ports:
       - 16030:16030
     networks:
-      - pandanet
+      - mynet
 
   kafka:
     image: wurstmeister/kafka:${KAFKA_VERSION}
@@ -114,7 +114,7 @@ services:
         max-size: "100m"
         max-file: "5"
     networks:
-      - pandanet
+      - mynet
 
   cassandra01:
     image: cassandra:${CASSANDRA_VERSION}
@@ -124,7 +124,7 @@ services:
     restart: always
     command: bash -c 'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 0; fi && /docker-entrypoint.sh cassandra -f'
     networks:
-      - pandanet
+      - mynet
     volumes:
       - ./storeddata/cassandra/n1data:/var/lib/cassandra
     environment:
@@ -149,7 +149,7 @@ services:
     restart: always
     command: bash -c 'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 60; fi && /docker-entrypoint.sh cassandra -f'
     networks:
-      - pandanet
+      - mynet
     volumes:
       - ./storeddata/cassandra/n2data:/var/lib/cassandra
     environment:
@@ -189,7 +189,7 @@ services:
         max-size: "100m"
         max-file: "5"
     networks:
-      - pandanet
+      - mynet
 
   mongodb:
     image: mongo:${MONGODB_VERSION}
@@ -212,7 +212,7 @@ services:
         max-size: "100m"
         max-file: "5"
     networks:
-      - pandanet
+      - mynet
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION}
@@ -235,7 +235,7 @@ services:
         max-size: "100m"
         max-file: "5"
     networks:
-      - pandanet
+      - mynet
 
   kibana:
     image: docker.elastic.co/kibana/kibana:${KIBANA_VERSION}
@@ -253,7 +253,7 @@ services:
         max-size: "100m"
         max-file: "5"
     networks:
-      - pandanet
+      - mynet
 
   sqlserver:
     image: microsoft/mssql-server-linux:${SQLSERVER_VERSION}
@@ -274,7 +274,7 @@ services:
         max-size: "100m"
         max-file: "5"
     networks:
-      - pandanet
+      - mynet
     
   clickhouse-server:
     image: yandex/clickhouse-server:${CLICKHOUSESERVER_VERSION}
