@@ -6,7 +6,7 @@ services:
     image: zookeeper:${ZOOKEEPER_VERSION}
     container_name: zookeeper
     hostname: zookeeper
-    mem_limit: 1024m
+    mem_limit: ${ZOOKEEPER_MEMLIMIT}
     restart: always
     ports:
       - "2181:2181"
@@ -20,7 +20,7 @@ services:
     image: bde2020/hadoop-namenode:${NAMENODE_VERSION}
     container_name: namenode
     hostname: namenode
-    mem_limit: 1024m
+    mem_limit: ${NAMENODE_MEMLIMIT}
     restart: always
     volumes:
       - ./storeddata/namenode:/hadoop/dfs/name
@@ -37,7 +37,7 @@ services:
     image: bde2020/hadoop-datanode:${DATANODE_VERSION}
     container_name: datanode
     hostname: datanode
-    mem_limit: 1024m
+    mem_limit: ${DATANODE_MEMLIMIT}
     restart: always
     volumes:
       - ./storeddata/datanode:/hadoop/dfs/data
@@ -54,7 +54,7 @@ services:
     image: bde2020/hbase-master:${HBASEMASTER_VERSION}
     container_name: hbase-master
     hostname: hbase-master
-    mem_limit: 1024m
+    mem_limit: ${HBASEMASTER_MEMLIMIT}
     restart: always
     env_file:
       - ./hbase-distributed-local.env
@@ -66,10 +66,10 @@ services:
       - mynet
 
   hbase-regionserver:
-    image: bde2020/hbase-regionserver:${HBASEREGION_VERSION}
+    image: bde2020/hbase-regionserver:${HBASEREGIONSERVER_VERSION}
     container_name: hbase-regionserver
     hostname: hbase-regionserver
-    mem_limit: 1024m
+    mem_limit: ${HBASEREGIONSERVER_MEMLIMIT}
     restart: always
     env_file:
       - ./hbase-distributed-local.env
@@ -85,7 +85,7 @@ services:
     image: wurstmeister/kafka:${KAFKA_VERSION}
     container_name: kafka
     hostname: kafka
-    mem_limit: 1024m
+    mem_limit: ${KAFKA_MEMLIMIT}
     restart: always
     ports:
       - "9092:9092"
@@ -120,7 +120,7 @@ services:
     image: cassandra:${CASSANDRA_VERSION}
     container_name: cassandra01
     hostname: cassandra01
-    mem_limit: 6g
+    mem_limit: ${CASSANDRA_MEMLIMIT}
     restart: always
     command: bash -c 'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 0; fi && /docker-entrypoint.sh cassandra -f'
     networks:
@@ -145,7 +145,7 @@ services:
     image: cassandra:${CASSANDRA_VERSION}
     container_name: cassandra02
     hostname: cassandra02
-    mem_limit: 6g
+    mem_limit: ${CASSANDRA_MEMLIMIT}
     restart: always
     command: bash -c 'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 60; fi && /docker-entrypoint.sh cassandra -f'
     networks:
@@ -177,7 +177,7 @@ services:
     image: redis:${REDIS_VERSION}
     container_name: redis
     hostname: redis
-    mem_limit: 1024m
+    mem_limit: ${REDIS_MEMLIMIT}
     restart: always
     ports:
       - "6379:6379"
@@ -195,7 +195,7 @@ services:
     image: mongo:${MONGODB_VERSION}
     container_name: mongodb
     hostname: mongodb
-    mem_limit: 1024m
+    mem_limit: ${MONGODB_MEMLIMIT}
     restart: always
     ports:
       - 27017:27017
@@ -218,7 +218,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION}
     container_name: elasticsearch
     hostname: elasticsearch
-    mem_limit: 2048m
+    mem_limit: ${ELASTICSEARCH_MEMLIMIT}
     restart: always
     ports:
       - 9200:9200
@@ -241,7 +241,7 @@ services:
     image: docker.elastic.co/kibana/kibana:${KIBANA_VERSION}
     container_name: kibana
     hostname: kibana
-    mem_limit: 2048m
+    mem_limit: ${KIBANA_MEMLIMIT}
     restart: always
     ports:
       - 5601:5601
@@ -259,7 +259,7 @@ services:
     image: microsoft/mssql-server-linux:${SQLSERVER_VERSION}
     container_name: sqlserver
     hostname: sqlserver
-    mem_limit: 2048m
+    mem_limit: ${SQLSERVER_MEMLIMIT}
     restart: always
     ports:
       - 1433:1433
@@ -280,7 +280,7 @@ services:
     image: yandex/clickhouse-server:${CLICKHOUSESERVER_VERSION}
     container_name: clickhouse-server
     hostname: clickhouse-server
-    mem_limit: 1024m
+    mem_limit: ${CLICKHOUSESERVER_MEMLIMIT}
     restart: always
     ports:
       - "8123:8123"
