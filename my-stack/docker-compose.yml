@@ -287,8 +287,8 @@ services:
       - "9000:9000"
       - "9009:9009"
     volumes:
-      - ./storeddata/clickhouse/clickhouse:/var/lib/clickhouse
-      - "./storeddata/clickhouse/clickhouse-server:/var/lib/clickhouse yandex/clickhouse-server"
+      - ./storeddata/clickhouse-server/clickhouse:/var/lib/clickhouse
+      - "./storeddata/clickhouse-server/clickhouse-server:/var/lib/clickhouse yandex/clickhouse-server"
     ulimits:
       nproc: 65535
       nofile:
