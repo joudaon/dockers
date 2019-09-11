@@ -1,0 +1,12 @@
+version: '2'
+services:
+
+  docker:
+    image: docker:dind
+    container_name: docker
+    hostname: docker
+    mem_limit: 2048m
+    restart: always
+    privileged: true
+    # volumes:
+    #   - /opt:/opt

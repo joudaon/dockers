@@ -1,0 +1,13 @@
+version: '2'
+services:
+
+  docker:
+    build:
+      context: .
+    container_name: docker
+    hostname: docker
+    mem_limit: 2048m
+    restart: always
+    privileged: true
+    # volumes:
+    #   - /opt:/opt
