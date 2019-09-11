@@ -23,7 +23,7 @@ services:
     mem_limit: 1024m
     restart: always
     volumes:
-      - ./storeddata/hadoop_namenode:/hadoop/dfs/name
+      - ./storeddata/namenode:/hadoop/dfs/name
     environment:
       - CLUSTER_NAME=test
     env_file:
@@ -40,7 +40,7 @@ services:
     mem_limit: 1024m
     restart: always
     volumes:
-      - ./storeddata/hadoop_datanode:/hadoop/dfs/data
+      - ./storeddata/datanode:/hadoop/dfs/data
     environment:
       SERVICE_PRECONDITION: "namenode:50070"
     env_file:
