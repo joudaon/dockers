@@ -1,0 +1,27 @@
+version: "3"
+services:
+
+  clickhouse-server:
+    image: yandex/clickhouse-server
+    container_name: clickhouse-server
+    hostname: clickhouse-server
+    mem_limit: 1024m
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+      - "9009:9009"
+    volumes:
+      - "./clickhouse_database:/var/lib/clickhouse yandex/clickhouse-server"
+      - ./data/clickhouse/data:/var/lib/clickhouse
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 262144
+        hard: 262144
+
+  client:
+    image: yandex/clickhouse-client
+    container_name: clickhouse-client
+    hostname: clickhouse-client
+    mem_limit: 1024m
+    command: ['--host', 'server']
