@@ -1,0 +1,308 @@
+version: '2.3'
+
+services:
+
+  zookeeper:
+    image: zookeeper:${ZOOKEEPER_VERSION}
+    container_name: zookeeper
+    hostname: zookeeper
+    mem_limit: 1024m
+    restart: always
+    ports:
+      - "2181:2181"
+    volumes:
+      - ./storeddata/zookeeper/data:/data
+      - ./storeddata/zookeeper/datalog:/datalog
+    networks:
+      - pandanet
+
+  namenode:
+    image: bde2020/hadoop-namenode:${NAMENODE_VERSION}
+    container_name: namenode
+    hostname: namenode
+    mem_limit: 1024m
+    restart: always
+    volumes:
+      - ./storeddata/hadoop_namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop.env
+    ports:
+      - 50070:50070
+    networks:
+      - pandanet
+
+  datanode:
+    image: bde2020/hadoop-datanode:${DATANODE_VERSION}
+    container_name: datanode
+    hostname: datanode
+    mem_limit: 1024m
+    restart: always
+    volumes:
+      - ./storeddata/hadoop_datanode:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070"
+    env_file:
+      - ./hadoop.env
+    ports:
+      - 50075:50075
+    networks:
+      - pandanet
+
+  hbase-master:
+    image: bde2020/hbase-master:${HBASEMASTER_VERSION}
+    container_name: hbase-master
+    hostname: hbase-master
+    mem_limit: 1024m
+    restart: always
+    env_file:
+      - ./hbase-distributed-local.env
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 zookeeper:2181"
+    ports:
+      - 16010:16010
+    networks:
+      - pandanet
+
+  hbase-regionserver:
+    image: bde2020/hbase-regionserver:${HBASEREGION_VERSION}
+    container_name: hbase-regionserver
+    hostname: hbase-regionserver
+    mem_limit: 1024m
+    restart: always
+    env_file:
+      - ./hbase-distributed-local.env
+    environment:
+      HBASE_CONF_hbase_regionserver_hostname: hbase-region
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 zookeeper:2181 hbase-master:16010"
+    ports:
+      - 16030:16030
+    networks:
+      - pandanet
+
+  kafka:
+    image: wurstmeister/kafka:${KAFKA_VERSION}
+    container_name: kafka
+    hostname: kafka
+    mem_limit: 1024m
+    restart: always
+    ports:
+      - "9092:9092"
+    environment:
+      # KAFKA_ADVERTISED_HOST_NAME: your host ip or localhost
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_CREATE_TOPICS: "topic1:1:1,topic2:1:1:compact"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ./storeddata/kafka/data:/var/lib/kafka/data
+      - ./storeddata/kafka/kafka:/kafka
+      #- /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: "kafka-topics.sh --zookeeper zookeeper:2181 --list 2>&1 | grep \"topic1\""
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - zookeeper
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    networks:
+      - pandanet
+
+  cassandra01:
+    image: cassandra:${CASSANDRA_VERSION}
+    container_name: cassandra01
+    hostname: cassandra01
+    mem_limit: 6g
+    restart: always
+    command: bash -c 'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 0; fi && /docker-entrypoint.sh cassandra -f'
+    networks:
+      - pandanet
+    volumes:
+      - ./storeddata/cassandra/n1data:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=dev_cluster
+      - CASSANDRA_SEEDS=cassandra01
+    expose:
+      - 7000
+      - 7001
+      - 7199
+      - 9042
+      - 9160
+    ulimits:
+      memlock: -1
+      nproc: 32768
+      nofile: 100000
+
+  cassandra02:
+    image: cassandra:${CASSANDRA_VERSION}
+    container_name: cassandra02
+    hostname: cassandra02
+    mem_limit: 6g
+    restart: always
+    command: bash -c 'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 60; fi && /docker-entrypoint.sh cassandra -f'
+    networks:
+      - pandanet
+    volumes:
+      - ./storeddata/cassandra/n2data:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=dev_cluster
+      - CASSANDRA_SEEDS=cassandra01
+    depends_on:
+      - cassandra01
+    expose:
+      # Intra-node communication
+      - 7000
+      # TLS intra-node communication
+      - 7001
+      # JMX
+      - 7199
+      # CQL
+      - 9042
+      # Thrift service
+      - 9160
+    ulimits:
+      memlock: -1
+      nproc: 32768
+      nofile: 100000
+
+  redis:
+    image: redis:${REDIS_VERSION}
+    container_name: redis
+    hostname: redis
+    mem_limit: 1024m
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./storeddata/redis/data:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    networks:
+      - pandanet
+
+  mongodb:
+    image: mongo:${MONGODB_VERSION}
+    container_name: mongodb
+    hostname: mongodb
+    mem_limit: 1024m
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./storeddata/mongodb/db-data:/data/db
+      # - ./mongo-config:/data/configdb
+      # - ./mongo.conf:/etc/mongo.conf
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    networks:
+      - pandanet
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION}
+    container_name: elasticsearch
+    hostname: elasticsearch
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      #- ./storeddata/elasticsearch/data:/usr/share/elasticsearch/data:rw
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    networks:
+      - pandanet
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:${KIBANA_VERSION}
+    container_name: kibana
+    hostname: kibana
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 5601:5601
+    volumes:
+      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    networks:
+      - pandanet
+
+  sqlserver:
+    image: microsoft/mssql-server-linux:${SQLSERVER_VERSION}
+    container_name: sqlserver
+    hostname: sqlserver
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: "Password1234!"
+    volumes:
+      - ./storeddata/sqlserver/mssql:/var/opt/mssql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    networks:
+      - pandanet
+    
+  clickhouse-server:
+    image: yandex/clickhouse-server:${CLICKHOUSESERVER_VERSION}
+    container_name: clickhouse-server
+    hostname: clickhouse-server
+    mem_limit: 1024m
+    restart: always
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+      - "9009:9009"
+    volumes:
+      - ./storeddata/clickhouse/clickhouse:/var/lib/clickhouse
+      - "./storeddata/clickhouse/clickhouse-server:/var/lib/clickhouse yandex/clickhouse-server"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 262144
+        hard: 262144
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    networks:
+      - mynet
+
+networks:
+
+  mynet:
+    driver: bridge
