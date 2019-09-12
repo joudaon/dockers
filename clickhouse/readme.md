@@ -19,7 +19,7 @@
 
 ```sh
 # Get into clickhouse-server container
-$> docker exec -ti clickhouse-server /bin/bash
+$> docker-compose exec clickhouse-server /bin/bash
 ```
 
 ```sh

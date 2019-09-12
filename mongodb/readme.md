@@ -19,7 +19,7 @@ Mongodb default installation dir is: /usr/bin
 
 ```sh
 # Get into mongodb container
-$> docker exec -ti mongodb /bin/bash
+$> docker-compose exec mongodb /bin/bash
 ```
 
 ```sh
