@@ -12,6 +12,7 @@ Stored data will be placed in current directory under "./storeddata" folder.
   - [Services' versions](#services-versions)
   - [Ports](#ports)
   - [Elasticsearch](#elasticsearch)
+  - [Hbase](#hbase)
   - [Commands](#commands)
 
 ## Available services
@@ -55,6 +56,13 @@ List of the services' ports.
 Kibana username and password:
 - user: elastic
 - password: changeme
+
+## Hbase
+
+Start thrift (inside hbase-master container):
+```sh
+$> /opt/hbase-1.2.6/bin/hbase-daemon.sh start thrift2 -p 9090
+```
 
 ## Commands
 
