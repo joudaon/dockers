@@ -176,15 +176,31 @@ services:
       nofile: 100000
 
   redis:
-    image: redis:${REDIS_VERSION}
+    image: grokzen/redis-cluster:${REDIS_VERSION}
     container_name: redis
     hostname: redis
     mem_limit: ${REDIS_MEMLIMIT}
     restart: always
-    ports:
-      - "6379:6379"
     volumes:
-      - ./storeddata/redis/data:/data
+      - ./redis-data:/redis-data
+      - ./data:/data
+    ports:
+      - 5000:5000
+      - 5001:5001
+      # master
+      - 7000:7000
+      # master
+      - 7001:7001
+      # master
+      - 7002:7002
+      # slave
+      - 7003:7003
+      # slave
+      - 7004:7004
+      # slave
+      - 7005:7005
+    environment:
+      IP: 0.0.0.0
     logging:
       driver: "json-file"
       options:
@@ -206,7 +222,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - ./storeddata/mongodb/db-data:/data/db
-      # - ./mongo-config:/data/configdb
+      - ./storeddata/mongodb/mongo-config:/data/configdb
       # - ./mongo.conf:/etc/mongo.conf
     logging:
       driver: "json-file"
@@ -227,7 +243,7 @@ services:
       - 9300:9300
     volumes:
       - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      #- ./storeddata/elasticsearch/data:/usr/share/elasticsearch/data:rw
+      - ./storeddata/elasticsearch/data:/usr/share/elasticsearch/data:rw
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
@@ -277,7 +293,7 @@ services:
         max-file: "5"
     networks:
       - mynet
-    
+
   clickhouse-server:
     image: yandex/clickhouse-server:${CLICKHOUSESERVER_VERSION}
     container_name: clickhouse-server
