@@ -182,8 +182,8 @@ services:
     mem_limit: ${REDIS_MEMLIMIT}
     restart: always
     volumes:
-      - ./redis-data:/redis-data
-      - ./data:/data
+      - ./storeddata/redis/redis-data:/redis-data
+      - ./storeddata/redis/data:/data
     ports:
       - 5000:5000
       - 5001:5001

@@ -21,7 +21,7 @@ $> docker exec -ti redis-cluster /bin/bash
 # Go to binaries
 $> cd /usr/local/bin
 # Connect to redis
-$> /usr/local/bin/redis-cli -h localhost -p 6379
+$> /usr/local/bin/redis-cli -h localhost -p 7000
 # Insert key
 $> set mykey "hello"
 # Get key
