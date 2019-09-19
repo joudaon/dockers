@@ -16,7 +16,7 @@ services:
             - mongo
             - redis
         volumes:
-            - ~/sharelatex_data:/var/lib/sharelatex
+            - ./storeddata/sharelatex_data:/var/lib/sharelatex
             - /var/run/docker.sock:/var/run/docker.sock
         environment:
 
@@ -94,7 +94,8 @@ services:
         expose:
             - 27017
         volumes:
-            - ~/mongo_data:/data/db
+            - ./storeddata/mongo_data:/data/db
+            - ./storeddata/mongodb/mongo-config:/data/configdb
         healthcheck:
             test: echo 'db.stats().ok' | mongo localhost:27017/test --quiet
             interval: 10s
@@ -108,7 +109,8 @@ services:
         expose:
             - 6379
         volumes:
-            - ~/redis_data:/data
+            - ./storeddata/redis/redis-data:/redis-data
+            - ./storeddata/redis_data:/data
 
     # ldap:
     #    restart: always
