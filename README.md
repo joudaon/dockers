@@ -52,3 +52,9 @@ Once all the containers are deleted, you can delete all the Docker volumes on yo
 ```sh
 $> docker volume prune
 ```
+
+Deleting all docker data
+
+```sh
+$> docker system prune -a
+```
