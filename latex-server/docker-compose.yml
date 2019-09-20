@@ -1,9 +1,11 @@
 version: '2.2'
 services:
     sharelatex:
-        restart: always
         image: sharelatex/sharelatex
         container_name: sharelatex
+        hostname: sharelatex
+        mem_limit: 2048m
+        restart: always
         depends_on:
             mongo:
                 condition: service_healthy
@@ -88,9 +90,11 @@ services:
             # SHARELATEX_PROXY_LEARN: "true"
 
     mongo:
-        restart: always
-        image: mongo
+        image: mongo:latest
         container_name: mongo
+        hostname: mongo
+        mem_limit: 1024m
+        restart: always
         expose:
             - 27017
         volumes:
@@ -103,9 +107,11 @@ services:
             retries: 5
 
     redis:
-        restart: always
-        image: redis
+        image: redis:latest
         container_name: redis
+        hostname: redis
+        mem_limit: 1024m
+        restart: always
         expose:
             - 6379
         volumes:
