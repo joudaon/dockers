@@ -1,7 +1,7 @@
 version: '2.2'
 services:
     sharelatex:
-        image: dennis1f/sharelatex-texlive2018 # sharelatex/sharelatex:latest
+        image: dennis1f/sharelatex-texlive2018:latest # sharelatex/sharelatex:latest
         container_name: sharelatex
         hostname: sharelatex
         mem_limit: 2048m
