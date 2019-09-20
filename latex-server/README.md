@@ -83,3 +83,4 @@ Copyright (c) Overleaf, 2014-2019.
 - [Host Your Own LaTeX Server](https://medium.com/@shuangzizuobh2/host-your-own-latex-server-a-docker-example-2787531bf93b)
 - [Overleaf - A web-based collaborative LaTeX editor](https://github.com/overleaf/overleaf)
 - [docker image](https://github.com/overleaf/docker-image)
+- [Update TexLive to 2018](https://github.com/overleaf/overleaf/issues/601)

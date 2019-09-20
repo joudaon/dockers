@@ -1,7 +1,7 @@
 version: '2.2'
 services:
     sharelatex:
-        image: sharelatex/sharelatex
+        image: sharelatex/sharelatex:latest
         container_name: sharelatex
         hostname: sharelatex
         mem_limit: 2048m
