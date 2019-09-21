@@ -20,6 +20,8 @@ services:
         volumes:
             - ./storeddata/sharelatex_data:/var/lib/sharelatex
             - /var/run/docker.sock:/var/run/docker.sock
+        networks:
+            - sharelatex_net
         environment:
 
             SHARELATEX_APP_NAME: Overleaf Community Edition
@@ -105,6 +107,8 @@ services:
             interval: 10s
             timeout: 10s
             retries: 5
+        networks:
+            - sharelatex_net
 
     redis:
         image: redis:latest
@@ -117,3 +121,10 @@ services:
         volumes:
             - ./storeddata/redis/redis-data:/redis-data
             - ./storeddata/redis_data:/data
+        networks:
+            - sharelatex_net
+
+networks:
+
+  sharelatex_net:
+    driver: bridge

@@ -1,7 +1,7 @@
 version: '2.2'
 services:
     sharelatex:
-        image: joudaon/sharelatex-texlive2019:latest # sharelatex/sharelatex:latest
+        image: sharelatex/sharelatex:latest
         container_name: sharelatex
         hostname: sharelatex
         mem_limit: 2048m
@@ -19,8 +19,13 @@ services:
             - redis
         volumes:
             - ./storeddata/sharelatex_data:/var/lib/sharelatex
+            - ./sharelatex_texlive:/usr/local/texlive
             - /var/run/docker.sock:/var/run/docker.sock
+        networks:
+            - sharelatex_net
         environment:
+
+            PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/texlive/2019/bin/x86_64-linux/
 
             SHARELATEX_APP_NAME: Overleaf Community Edition
 
@@ -105,6 +110,8 @@ services:
             interval: 10s
             timeout: 10s
             retries: 5
+        networks:
+            - sharelatex_net
 
     redis:
         image: redis:latest
@@ -117,3 +124,10 @@ services:
         volumes:
             - ./storeddata/redis/redis-data:/redis-data
             - ./storeddata/redis_data:/data
+        networks:
+            - sharelatex_net
+
+networks:
+
+  sharelatex_net:
+    driver: bridge

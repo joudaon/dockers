@@ -1,0 +1,4 @@
+storeddata/
+install-tl-*/
+*.tar.gz
+sharelatex_texlive/
