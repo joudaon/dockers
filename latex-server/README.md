@@ -26,6 +26,7 @@
 - [Authors](#authors)
 - [License](#license)
 - [Dockerfile file](#dockerfile-file)
+- [Getting actual users registered in Sharelatex](#getting-actual-users-registered-in-sharelatex)
 - [Useful links](#useful-links)
 
 ## Key Features
@@ -87,9 +88,23 @@ This file creates a new image with the latest "texlive" packages.
 $> docker build -t joudaon/sharelatex-texlive2019:latest .
 ```
 
+## Getting actual users registered in Sharelatex
+
+```sh
+# Get csv file of users
+$> mongoexport -d sharelatex -c users --type=csv --fields email --out users.csv
+
+# Log in mongodb database
+$> sudo mongo --host 172.17.0.1
+$> use sharelatex
+$> show collections
+$> db.users.find().pretty()
+```
+
 ## Useful links
 
 - [Host Your Own LaTeX Server](https://medium.com/@shuangzizuobh2/host-your-own-latex-server-a-docker-example-2787531bf93b)
 - [Overleaf - A web-based collaborative LaTeX editor](https://github.com/overleaf/overleaf)
 - [docker image](https://github.com/overleaf/docker-image)
 - [Update TexLive to 2018](https://github.com/overleaf/overleaf/issues/601)
+- [Modification of existing user e-mail address](https://github.com/overleaf/overleaf/issues/583)
