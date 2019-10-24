@@ -1,0 +1,16 @@
+version: '2.3'
+
+services:
+
+  datascience-notebook:
+    image: jupyter/datascience-notebook
+    container_name: datascience-notebook
+    hostname: datascience-notebook
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 8888:8888
+    volumes:
+      - ./storeddata/work:/home/jovyan/work
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
