@@ -12,6 +12,7 @@ services:
       - 8888:8888
     volumes:
       - ./storeddata/work:/home/jovyan/work
+      - /var/run/docker.sock:/var/run/docker.sock
     user: root
     environment:
       - JUPYTER_ENABLE_LAB=yes

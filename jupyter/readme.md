@@ -7,6 +7,7 @@
   - [What is Jupyter?](#what-is-jupyter)
   - [Preparing storeddata folder](#preparing-storeddata-folder)
   - [Creating a token with a password](#creating-a-token-with-a-password)
+  - [Enabling docker inside the container](#enabling-docker-inside-the-container)
   - [Docker useful links](#docker-useful-links)
 
 ## What is Jupyter?
@@ -27,6 +28,12 @@ In [2]: passwd()
 Enter password:
 Verify password:
 Out[2]: 'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed'
+```
+
+## Enabling docker inside the container
+
+```sh
+$> sudo usermod -aG docker jovyan
 ```
 
 ## Docker useful links
