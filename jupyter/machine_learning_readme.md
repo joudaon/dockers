@@ -17,6 +17,7 @@ This readme files contains information with all datascience and machine learning
 - [numpy](https://numpy.org/)
 - [pandas](https://pandas.pydata.org/)
 - [scikit-learn](https://scikit-learn.org/stable/)
+- [Natural Language Toolkit¶](https://www.nltk.org/)
 
 ## Datasets
 
@@ -24,6 +25,7 @@ This readme files contains information with all datascience and machine learning
 - [movielens](https://grouplens.org/datasets/movielens/)
 - [kaggle - World development indicators](https://www.kaggle.com/worldbank/world-development-indicators)
 - [minute_weather.csv](https://drive.google.com/file/d/0B8iiZ7pSaSFZb3ItQ1l4LWRMTjg/view)
+- [Iris Species](https://www.kaggle.com/uciml/iris/download)
 
 ## Example code
 - [edx Soccer](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/51bc9c62d2a4c9a03140fe521b069753/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week-1-Intro-new.zip)
@@ -32,6 +34,7 @@ This readme files contains information with all datascience and machine learning
 - [Data visualization](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/07fdbcdcf18fa306bdbb042f64132f09/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week5-Visualization.zip)
 - [Machine learning](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/67715bdd21eebbb26a95b1b3cc4a6684/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week-7-MachineLearning.zip)
 - [Text and Databases](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/4f283f7388ded41911aeafa06fc6afa6/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week-8-NLP-Databases.zip)
+- [Natural Language Processing - Databases](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/4f283f7388ded41911aeafa06fc6afa6/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week-8-NLP-Databases.zip)
 
 ## Useful courses
 

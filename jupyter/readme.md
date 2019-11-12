@@ -32,9 +32,13 @@ Out[2]: 'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed'
 
 ## Enabling docker inside the container
 
+Run on the host:
+
 ```sh
-$> sudo usermod -aG docker jovyan
+$> sudo chmod 666 /var/run/docker.sock
 ```
+
+More information [here](https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue).
 
 ## Docker useful links
 
