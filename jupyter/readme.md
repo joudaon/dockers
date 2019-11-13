@@ -34,8 +34,49 @@ Out[2]: 'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed'
 
 Run on the host:
 
+By default host values on /var/run/docker.sock are:
+
 ```sh
-$> sudo chmod 666 /var/run/docker.sock
+srw-rw----  1 root  docker    0 Nov 13 20:39 docker.sock=
+```
+
+We go inside the container and the default values are: 
+
+```sh
+srw-rw---- 1 root  999    0 Nov 13 19:39 docker.sock
+```
+
+Now we run the following inside the container:
+
+```sh
+$> sudo groupadd docker
+$> sudo usermod -aG docker jovyan
+$> sudo chown jovyan:docker docker.sock
+```
+
+The values change to:
+
+```sh
+# Inside the container
+srw-rw---- 1 jovyan docker    0 Nov 13 19:39 docker.sock=
+# On the host
+srw-rw----  1 judaondo judaondo    0 Nov 13 20:39 docker.sock=
+```
+
+We can test that docker works inside the container by:
+
+Install docker with pip:
+
+```sh
+$> pip install docker
+```
+
+Run the following lines in python:
+
+```python
+import docker
+client = docker.from_env()
+client.images.list()
 ```
 
 More information [here](https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue).
