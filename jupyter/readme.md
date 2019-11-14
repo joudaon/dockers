@@ -60,7 +60,7 @@ The values change to:
 # Inside the container
 srw-rw---- 1 jovyan docker    0 Nov 13 19:39 docker.sock=
 # On the host
-srw-rw----  1 judaondo judaondo    0 Nov 13 20:39 docker.sock=
+srw-rw----  1 joudaon joudaon    0 Nov 13 20:39 docker.sock=
 ```
 
 We can test that docker works inside the container by:
