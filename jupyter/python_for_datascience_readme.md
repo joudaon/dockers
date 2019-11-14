@@ -6,11 +6,15 @@ This readme files contains information with all datascience and machine learning
 
 - [Machine Learning](#machine-learning)
   - [TOC](#toc)
+  - [Course](#course)
   - [Libraries links](#libraries-links)
   - [Datasets](#datasets)
   - [Example code](#example-code)
-  - [Useful courses](#useful-courses)
   - [Visualization libraries](#visualization-libraries)
+
+## Course
+
+- [Python for Data Science](https://www.edx.org/course/python-for-data-science-3)
 
 ## Libraries links
 
@@ -21,11 +25,18 @@ This readme files contains information with all datascience and machine learning
 
 ## Datasets
 
+Main ones:
 - [kaggle](https://www.kaggle.com/)
 - [movielens](https://grouplens.org/datasets/movielens/)
 - [kaggle - World development indicators](https://www.kaggle.com/worldbank/world-development-indicators)
 - [minute_weather.csv](https://drive.google.com/file/d/0B8iiZ7pSaSFZb3ItQ1l4LWRMTjg/view)
 - [Iris Species](https://www.kaggle.com/uciml/iris/download)
+
+Others:
+- [KDnuggets Dataset](https://www.kdnuggets.com/datasets/index.html)
+- [US Government Data](https://www.data.gov/) 
+- [US Government Data](https://data.gov.uk/)
+- [World Health Organization](https://www.who.int/gho/en/)
 
 ## Example code
 - [edx Soccer](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/51bc9c62d2a4c9a03140fe521b069753/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week-1-Intro-new.zip)
@@ -35,10 +46,7 @@ This readme files contains information with all datascience and machine learning
 - [Machine learning](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/67715bdd21eebbb26a95b1b3cc4a6684/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week-7-MachineLearning.zip)
 - [Text and Databases](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/4f283f7388ded41911aeafa06fc6afa6/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week-8-NLP-Databases.zip)
 - [Natural Language Processing - Databases](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/4f283f7388ded41911aeafa06fc6afa6/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week-8-NLP-Databases.zip)
-
-## Useful courses
-
-- [Python for Data Science](https://www.edx.org/course/python-for-data-science-3)
+- [Python 4 datascience - Example notebook](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/9be6813917bd9292d1523b31d2f2b47e/asset-v1:UCSanDiegoX+DSE200x+3T2019+type@asset+block/Week-9-ExampleNotebooks.zip)
 
 ## Visualization libraries
 
