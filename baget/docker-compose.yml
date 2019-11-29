@@ -1,0 +1,15 @@
+version: '2.3'
+services:
+
+  nuget:
+    image: loicsharma/baget
+    container_name: baget
+    hostname: baget
+    ports:
+      - 8085:80
+    env_file:
+      - baget.env
+    volumes:
+      - ./baget-data:/var/baget
+    mem_limit: 2048m
+    restart: always
