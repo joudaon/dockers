@@ -11,6 +11,8 @@
 
 - [Installing Artifactory with Docker](https://www.jfrog.com/confluence/display/RTF/Installing+with+Docker)
 - [Artifactory Docker Compose Examples](https://github.com/jfrog/artifactory-docker-examples/tree/master/docker-compose/artifactory)
+- [Artifactory docker versions](https://bintray.com/jfrog/reg2/jfrog%3Aartifactory-oss)
+- [Artifactory versions](https://bintray.com/jfrog/product/JFrog-Artifactory-Oss/view)
 
 ## Information
 
