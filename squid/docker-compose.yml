@@ -1,0 +1,23 @@
+version: '2.3'                                                                                                                                                                                              
+                                                  
+services:   
+  squid:               
+    image: sameersbn/squid:3.5.27-2
+    container_name: squid
+    hostname: squid
+    mem_limit: 2048m
+    ports:      
+      - "3128:3128"                                
+    restart: always
+    volumes:
+      # for the cache to preserve its state across container shutdown and startup
+      - ./srv/docker/squid/cache:/var/spool/squid
+      # configure Squid as per your requirements (squid.conf, blocked_sites, etc...)
+      - ./conf:/etc/squid/
+      # access squid logs
+      - ./logs:/var/log/squid/
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
