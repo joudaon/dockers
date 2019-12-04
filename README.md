@@ -58,3 +58,9 @@ Deleting all docker data
 ```sh
 $> docker system prune -a
 ```
+
+Copy file from container to host
+
+```sh
+$> docker cp <containerId>:/file/path/within/container /host/path/target
+```
