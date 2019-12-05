@@ -7,6 +7,8 @@ Useful docker-compose files with different services.
 - [DOCKERS](#dockers)
   - [TOC](#toc)
   - [Commands](#commands)
+  - [Working with Dockerfiles](#working-with-dockerfiles)
+  - [Useful links:](#useful-links)
 
 ## Commands
 
@@ -64,3 +66,15 @@ Copy file from container to host
 ```sh
 $> docker cp <containerId>:/file/path/within/container /host/path/target
 ```
+
+## Working with Dockerfiles
+
+Building an image
+
+```sh
+$> docker build -t <imagename:tag> .
+```
+
+## Useful links:
+
+- [HOW TO KEEP DOCKER CONTAINERS RUNNING](http://bigdatums.net/2017/11/07/how-to-keep-docker-containers-running/)
