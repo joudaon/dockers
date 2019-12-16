@@ -27,7 +27,7 @@ To make this work we run the following
 # Start container
 $> docker-compose up -d
 # Get into the container
-$> docker-compose exec terrafom /bin/bash
+$> docker-compose exec terraform /bin/bash
 # Go to the mapped volumn directory and run terraform commands
 $> cd /terraform
 $> terraform init
