@@ -7,6 +7,8 @@
   - [Useful links](#useful-links)
   - [Information](#information)
     - [Persistent Data](#persistent-data)
+  - [Repository information](#repository-information)
+    - [Docker](#docker)
  
 ## Useful links
  
@@ -33,3 +35,24 @@ Mount a host directory as the volume. This is not portable, as it relies on the 
 $ mkdir /some/dir/nexus-data && chown -R 200 /some/dir/nexus-data
 $ docker run -d -p 8081:8081 --name nexus -v /some/dir/nexus-data:/nexus-data sonatype/nexus3
 ```
+ 
+## Repository information
+ 
+### Docker
+ 
+To make Docker repository work, please follow these steps:
+ 
+1. On Nexus web interface, set an HTTP connector in "Repository Connectors". A port must be set (5000 for example).
+2. On docker-compose.yml file, expose the above port.
+3. Update "/etc/docker/daemon.json" file and set our repository as insecure registry.
+    ```json
+    {
+    "insecure-registries": [
+        "http://<nexus-server-ip>:5000"
+        ]
+    }
+    ```
+4. Login into the docker repository:
+    ```sh
+    $> docker login -u <username> http://<nexus-server-ip>:5000
+    ```
