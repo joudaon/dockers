@@ -1,7 +1,7 @@
 version: '2.3'
 services:
 
-  mysql:
+  jenkins:
     image: jenkins/jenkins:latest
     container_name: jenkins
     mem_limit: 2048m
