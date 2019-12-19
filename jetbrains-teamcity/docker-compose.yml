@@ -1,0 +1,28 @@
+version: '2.3'
+services:
+
+  teamcity-server:
+    image: jetbrains/teamcity-server:latest
+    container_name: teamcity-server
+    mem_limit: 2048m
+    restart: always
+    ports:
+     - 8111:8111
+    volumes:
+      - ./data/server/data_dir:/data/teamcity_server/datadir
+      - ./data/server/logs:/opt/teamcity/logs
+  
+  teamcity-agent:
+    image: jetbrains/teamcity-agent:latest
+    container_name: teamcity-agent
+    mem_limit: 2048m
+    restart: always
+    volumes:
+      - ./data/agent/conf:/data/teamcity_agent/conf
+    depends_on:
+      - teamcity-server
+    environment:
+      - SERVER_URL=http://teamcity-server:8111
+      - AGENT_NAME=teamcity-agent
+    # volumes:
+    #  - ./data/artifactory:/var/opt/jfrog/artifactory
