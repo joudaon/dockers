@@ -1,0 +1,21 @@
+version: '2.3'                                                                                                                                                                                              
+                                                  
+services:
+
+  packer:
+    image: packer:$PACKER_VERSION         
+    build:
+      context: dockerfile/
+      args:
+        PACKER_VERSION: $PACKER_VERSION
+    container_name: packer
+    hostname: packer
+    mem_limit: 2048m                             
+    restart: always
+    volumes:
+      - ./packer:/packer
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
