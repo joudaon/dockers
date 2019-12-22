@@ -1,0 +1,49 @@
+version: '2.3'
+services:
+
+  saltmaster:
+    image: saltstak:$SALT_VERSION         
+    build:
+      context: dockerfile/
+      args:
+        SALT_VERSION: $SALT_VERSION
+    container_name: saltmaster
+    hostname: saltmaster
+    mem_limit: 2048m
+    restart: always
+    # volumes:
+    #   - ./storeddata/saltmaster/etc/salt:/etc/salt
+    #   - ./storeddata/saltmaster/logs/:/var/log/salt
+    #   - ./saltfiles:/saltfiles
+    environment:
+      SALT_INSTALL: salt-master
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  saltminion:
+    image: saltstak:$SALT_VERSION         
+    build:
+      context: dockerfile/
+      args:
+        SALT_VERSION: $SALT_VERSION
+    container_name: saltminion
+    hostname: saltminion
+    mem_limit: 2048m
+    restart: always
+    # volumes:
+    #   - ./storeddata/saltminion/etc/salt:/etc/salt
+    #   - ./storeddata/saltminion/logs/:/var/log/salt
+    environment:
+      SALT_INSTALL: salt-minion
+    ports:
+      - 80:80 # apache2
+    depends_on:
+      - saltmaster
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
