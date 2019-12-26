@@ -9,7 +9,9 @@
 - [jenkins docker-compose example](https://github.com/istresearch/jenkins/blob/master/docker-compose.yml)
 - [docker-compose Jenkins with persistent data](https://codeandunicorns.com/docker-compose-jenkins-persistent-data/)
 - [jenkins-base](https://github.com/fabric8io/jenkins-base)
-
+- [github - Official Jenkins Docker image](https://github.com/jenkinsci/docker/blob/master/README.md)
+- [How to run and upgrade Jenkins using the official Docker image](https://batmat.net/2018/09/07/how-to-run-and-upgrade-jenkins-using-the-official-docker-image/)
+- [New Jenkins Container And Update Jenkins (Docker)](https://medium.com/@jimkang/how-to-start-a-new-jenkins-container-and-update-jenkins-with-docker-cf628aa495e9)
 
 ## Information:
 To mount volume special permissions need to be added:
@@ -23,3 +25,15 @@ this will run Jenkins in detached mode with port forwarding and volume added. Yo
 $ sudo mkdir jenkins_home
 $ sudo chmod 777 jenkins_home/
 ```
+
+## Getting installed plugins
+
+In Jenkins "Script Console" type the following:
+
+```groovy
+Jenkins.instance.pluginManager.plugins.each{
+  plugin -> 
+    println ("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}")
+}
+```
+
