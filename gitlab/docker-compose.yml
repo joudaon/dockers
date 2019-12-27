@@ -8,15 +8,15 @@ services:
     hostname: 'gitlab'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'https://gitlab.example.com'
+        external_url 'http://gitlab.example.com'
     ports:
-      - '8082:80'
+      - '80:80'
       - '443:443'
       - '24:22'
     volumes:
-      - '$PWD/config:/etc/gitlab'
-      - '$PWD/logs:/var/log/gitlab'
-      - '$PWD/data:/var/opt/gitlab'
+      - ./config:/etc/gitlab
+      - ./logs:/var/log/gitlab
+      - ./data:/var/opt/gitlab
     logging:
       driver: "json-file"
       options:
