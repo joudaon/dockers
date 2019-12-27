@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  redis1:
+    container_name: redis1
+    hostname: redis1
+    image: redis
+  redis2:
+    container_name: redis2
+    hostname: redis2
+    image: redis
+
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    # volumes:
+    #   - ./local-production.json:/redis-commander/config/local-production.json
+    environment:
+      - REDIS_HOSTS=local1:redis1:6379,local2:redis2:6379
+    ports:
+      - 8081:8081
