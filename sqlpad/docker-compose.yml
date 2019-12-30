@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+  sqlpad:
+    image: sqlpad/sqlpad:latest
+    container_name: sqlpad
+    hostname: sqlpad
+    ports:
+      - 3000:3000
+    environment:
+      - SQLPAD_DEBUG=TRUE
+      - SQLPAD_ADMIN=administrator
+      - SQLPAD_ADMIN_PASSWORD=Password1234!
+    volumes:
+      - ./sqlpad:/var/lib/sqlpad
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
