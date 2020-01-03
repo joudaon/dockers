@@ -1,0 +1,40 @@
+version: '2'
+networks:
+  bridge:
+    driver: bridge
+services:
+  web:
+    image: "xwiki:lts-mysql-tomcat"
+    container_name: xwiki-web
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      - XWIKI_VERSION=xwiki
+      - DB_USER=xwiki
+      - DB_PASSWORD=xwiki
+      - DB_DATABASE=xwiki
+      - DB_HOST=xwiki-db
+    volumes:
+      - xwiki-data:/usr/local/xwiki
+    networks:
+      - bridge
+
+  db:
+    image: "mysql:5.7"
+    container_name: xwiki-db
+    volumes:
+      - ./mysql/xwiki.cnf:/etc/mysql/conf.d/xwiki.cnf
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=xwiki
+      - MYSQL_USER=xwiki
+      - MYSQL_PASSWORD=xwiki
+      - MYSQL_DATABASE=xwiki
+    networks:
+      - bridge
+
+volumes:
+  mysql-data: {}
+  xwiki-data: {}
