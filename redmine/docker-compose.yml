@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+
+  redmine:
+    image: redmine
+    contanier_name: redmine
+    restart: always
+    ports:
+      - 8080:3000
+    environment:
+      REDMINE_DB_MYSQL: db
+      REDMINE_DB_PASSWORD: example
+
+  db:
+    image: mysql:5.7
+    contanier_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: redmine
