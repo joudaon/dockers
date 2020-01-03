@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+
+  openproject:
+    image: openproject/community:latest
+    container_name: openproject
+    hostname: openproject
+    mem_limit: 2048m
+    restart: always
+    ports: 
+      - 80:80
+    environment:
+      - SECRET_KEY_BASE=secret
+    volumes:
+      - ./storeddata/pgdata:/var/openproject/pgdata
+      - ./storeddata/assets:/var/openproject/assets
