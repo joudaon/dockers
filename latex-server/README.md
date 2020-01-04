@@ -104,6 +104,8 @@ $> db.users.find().pretty()
 
 ## Information
 
+Overleaf Community Edition 2.0.0 has been released, including TexLive 2019 by default.
+
 When everything is up go to: http://localhost/launchpad to set up admin user.
 
 ## Useful links
@@ -113,3 +115,5 @@ When everything is up go to: http://localhost/launchpad to set up admin user.
 - [docker image](https://github.com/overleaf/docker-image)
 - [Update TexLive to 2018](https://github.com/overleaf/overleaf/issues/601)
 - [Modification of existing user e-mail address](https://github.com/overleaf/overleaf/issues/583)
+- [docker-hub: overleaf](https://hub.docker.com/r/sharelatex/sharelatex)
+- [github wiki](https://github.com/overleaf/overleaf/wiki)
