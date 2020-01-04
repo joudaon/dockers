@@ -27,6 +27,7 @@
 - [License](#license)
 - [Dockerfile file](#dockerfile-file)
 - [Getting actual users registered in Sharelatex](#getting-actual-users-registered-in-sharelatex)
+- [Information](#information)
 - [Useful links](#useful-links)
 
 ## Key Features
@@ -100,6 +101,10 @@ $> use sharelatex
 $> show collections
 $> db.users.find().pretty()
 ```
+
+## Information
+
+When everything is up go to: http://localhost/launchpad to set up admin user.
 
 ## Useful links
 
