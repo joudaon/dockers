@@ -6,16 +6,28 @@
 
 set -e
 
-echo "--> [Entrypoint] $SALT_INSTALL"
+echo "--> [Entrypoint] Salt"
+
+saltpath="/etc/salt"
 
 if [[ "$SALT_INSTALL" ]]; then
-    echo "<< Installing salt >>"
-    apt-get -y install $SALT_INSTALL
-    echo "<< Installing salt successful >>"
-    echo "<< Starting service >>"
-    service $SALT_INSTALL start
-    echo "<< Displaying /etc/salt folder >>"
-    ls -alh /etc/salt
+    # Check if /etc/salt directory exist to check if salt is installed
+    if [ -d "$saltpath" ]; then
+        # Service already installed
+        echo "<< Service $SALT_INSTALL already installed >>"
+        echo "<< ------------------------------------- >>"
+    else
+        # Service not installed
+        echo "<< Installing salt >>"
+        apt-get -y install $SALT_INSTALL
+        echo "<< Installing salt successful >>"
+        echo "<< Starting service >>"
+        service $SALT_INSTALL start
+        echo "<< Displaying $saltpath folder >>"
+        ls -alh $saltpath
+        echo "<< Installation finished >>"
+        echo "<< --------------------- >>"
+    fi
 fi
 
 # if [[ "$SALT_INSTALL" == salt-minion ]]; then
