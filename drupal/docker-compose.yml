@@ -1,0 +1,55 @@
+version: '2.3'
+
+services:
+
+  drupal:
+    image: drupal:latest
+    container_name: drupal
+    hostname: drupal
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - drupal_modules:/var/www/html/modules
+      - drupal_profiles:/var/www/html/profiles
+      - drupal_themes:/var/www/html/themes
+      # this takes advantage of the feature in Docker that a new anonymous
+      # volume (which is what we're creating here) will be initialized with the
+      # existing content of the image at the same location
+      - drupal_sites:/var/www/html/sites
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
+          max-file: "5"
+
+  postgres:
+    image: postgres:11
+    container_name: postgres
+    hostname: postgres
+    mem_limit: 2048m
+    restart: always
+    environment:
+      - POSTGRES_DB=drupal
+      - POSTGRES_USER=drupal
+      - POSTGRES_PASSWORD=Password1234!
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
+          max-file: "5"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  drupal_modules:
+  drupal_profiles:
+  drupal_themes:
+  drupal_sites:
+  postgres_data:
