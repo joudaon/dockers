@@ -1,0 +1,21 @@
+version: '2.3'
+
+services:
+
+  traefik:
+    image: traefik:v2.1.1
+    container_name: traefik
+    hostname: traefik
+    mem_limit: 1024m
+    ports:
+      - 8080:8080
+      - 80:80
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
