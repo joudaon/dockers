@@ -4,25 +4,64 @@ services:
   teamcity-server:
     image: jetbrains/teamcity-server:latest
     container_name: teamcity-server
+    hostname: teamcity-server
     mem_limit: 2048m
     restart: always
     ports:
-     - 8111:8111
+      - 8111:8111
     volumes:
-      - ./data/server/data_dir:/data/teamcity_server/datadir
-      - ./data/server/logs:/opt/teamcity/logs
+      - ./teamcity-server/data_dir:/data/teamcity_server/datadir
+      - ./teamcity-server/logs:/opt/teamcity/logs
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
+          max-file: "5"
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    hostname: mysql
+    mem_limit: 2048m
+    restart: always
+    environment:
+      MYSQL_DATABASE: teamcity
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: Password1234!
+    volumes:
+      - ./mysqldata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
+          max-file: "5"
   
   teamcity-agent:
     image: jetbrains/teamcity-agent:latest
     container_name: teamcity-agent
+    hostname: teamcity-agent
     mem_limit: 2048m
     restart: always
     volumes:
-      - ./data/agent/conf:/data/teamcity_agent/conf
+      - ./teamcity-agent/conf:/data/teamcity_agent/conf
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./teamcity-agent/work:/opt/buildagent/work
+      - ./teamcity-agent/temp:/opt/buildagent/temp
+      - ./teamcity-agent/tools:/opt/buildagent/tools
+      - ./teamcity-agent/plugins:/opt/buildagent/plugins
+      - ./teamcity-agent/system:/opt/buildagent/system
     depends_on:
       - teamcity-server
     environment:
-      - SERVER_URL=http://teamcity-server:8111
-      - AGENT_NAME=teamcity-agent
-    # volumes:
-    #  - ./data/artifactory:/var/opt/jfrog/artifactory
+      SERVER_URL: http://teamcity-server:8111
+      AGENT_NAME: teamcity-agent
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
+          max-file: "5"
