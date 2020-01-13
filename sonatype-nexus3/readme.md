@@ -9,6 +9,7 @@
     - [Persistent Data](#persistent-data)
   - [Repository information](#repository-information)
     - [Docker](#docker)
+    - [File upload](#file-upload)
  
 ## Useful links
  
@@ -56,3 +57,11 @@ To make Docker repository work, please follow these steps:
     ```sh
     $> docker login -u <username> http://<nexus-server-ip>:5000
     ```
+
+### File upload
+
+Files can be uploaded from command line this way:
+
+```sh
+$> curl --fail -u admin:Password1234! --upload-file test.txt 'http://172.28.103.82:8081/repository/myrepository/'
+```
