@@ -1,10 +1,8 @@
-FROM node:alpine as builder
+FROM alpine:latest as builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+COPY index.html .
+RUN sed -i 's/Hello/Goodbye/g' index.html
 
 FROM nginx
 EXPOSE 80
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/index.html /usr/share/nginx/html
