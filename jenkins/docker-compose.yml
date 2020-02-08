@@ -2,7 +2,7 @@ version: '2.3'
 services:
 
   jenkins:
-    image: jenkins:2.204.1
+    image: jenkins:2.204.2
     build:
       context: dockerfile/
     container_name: jenkins

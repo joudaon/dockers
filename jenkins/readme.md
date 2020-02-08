@@ -12,6 +12,7 @@
 - [github - Official Jenkins Docker image](https://github.com/jenkinsci/docker/blob/master/README.md)
 - [How to run and upgrade Jenkins using the official Docker image](https://batmat.net/2018/09/07/how-to-run-and-upgrade-jenkins-using-the-official-docker-image/)
 - [New Jenkins Container And Update Jenkins (Docker)](https://medium.com/@jimkang/how-to-start-a-new-jenkins-container-and-update-jenkins-with-docker-cf628aa495e9)
+- [Continuous Integration with Jenkins and Docker](https://code-maze.com/ci-jenkins-docker/)
 
 ## Information:
 To mount volume special permissions need to be added:
