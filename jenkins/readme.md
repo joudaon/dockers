@@ -13,6 +13,10 @@
 - [How to run and upgrade Jenkins using the official Docker image](https://batmat.net/2018/09/07/how-to-run-and-upgrade-jenkins-using-the-official-docker-image/)
 - [New Jenkins Container And Update Jenkins (Docker)](https://medium.com/@jimkang/how-to-start-a-new-jenkins-container-and-update-jenkins-with-docker-cf628aa495e9)
 - [Continuous Integration with Jenkins and Docker](https://code-maze.com/ci-jenkins-docker/)
+- [docker-jenkins](https://github.com/foxylion/docker-jenkins)
+- [jenkins-bootstrap-shared](https://github.com/samrocketman/jenkins-bootstrap-shared/tree/master/scripts)
+- [Jenkins Docker image](https://github.com/thbkrkr/jks)
+- [Groovy Hook Script and Jenkins Configuration as Code](http://tdongsi.github.io/blog/2017/12/30/groovy-hook-script-and-jenkins-configuration-as-code/)
 
 ## Information:
 To mount volume special permissions need to be added:

@@ -2,7 +2,7 @@ version: '2.3'
 services:
 
   jenkins:
-    image: jenkins:2.204.2
+    image: jenkins-custom:2.204.3
     build:
       context: dockerfile/
     container_name: jenkins
@@ -15,7 +15,7 @@ services:
     volumes:
       - ./jenkins_home:/var/jenkins_home
     environment:
-      JAVA_OPTS: "-Djava.awt.headless=true"
+      JAVA_OPTS: "-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
     logging:
       driver: "json-file"
       options:
