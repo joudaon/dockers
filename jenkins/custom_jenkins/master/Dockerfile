@@ -14,7 +14,8 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 ENV JENKINS_USER admin
 ENV JENKINS_PASS admin
 
-# Setting custom executor number
+# '*.groovy' files placed at /usr/share/jenkins/ref/init.groovy.d/
+# will execute custom configurations settings
 COPY init.groovy.d /usr/share/jenkins/ref/init.groovy.d/
 
 VOLUME /var/jenkins_home

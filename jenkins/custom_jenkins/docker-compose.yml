@@ -6,6 +6,7 @@ services:
     build:
       context: master/
     container_name: jenkins-master
+    hostname: jenkins-master
     mem_limit: 2048m
     restart: always
     ports:
@@ -13,9 +14,30 @@ services:
       - '443:443'
       - '50000:50000' #build executors port
     volumes:
-      - ./jenkins_home:/var/jenkins_home
+      - ./master/jenkins_home:/var/jenkins_home
     environment:
       JAVA_OPTS: "-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+  
+  jenkins-ssh-slave:
+    image: jenkins-ssh-slave:2.204.4
+    build:
+      context: ssh-slave/
+    container_name: jenkins-ssh-slave
+    hostname: jenkins-ssh-slave
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - '2222:22'
+    volumes:
+      - ./ssh-slave/home/jenkins:/home/jenkins
+      - /var/run/docker.sock:/var/run/docker.sock
+    # environment:
+    #   SSH_KEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6CPOQDrq...faMvvidd+RVSfDBgJE1g3 jenkins@jenkins.company.tld"
     logging:
       driver: "json-file"
       options:
