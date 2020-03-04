@@ -1,0 +1,23 @@
+version: '2.3'
+services:
+
+  jenkins-master:
+    image: jenkins-master:2.204.4
+    build:
+      context: master/
+    container_name: jenkins-master
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - '80:8080'
+      - '443:443'
+      - '50000:50000' #build executors port
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+    environment:
+      JAVA_OPTS: "-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"

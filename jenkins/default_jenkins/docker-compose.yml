@@ -3,9 +3,6 @@ services:
 
   jenkins:
     image: jenkins-custom:2.204.3
-    build:
-      context: dockerfile/
-    container_name: jenkins
     mem_limit: 2048m
     restart: always
     ports:
@@ -15,7 +12,7 @@ services:
     volumes:
       - ./jenkins_home:/var/jenkins_home
     environment:
-      JAVA_OPTS: "-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
+      JAVA_OPTS: "-Djava.awt.headless=true"
     logging:
       driver: "json-file"
       options:

@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.204.3
+FROM jenkins/jenkins:2.204.4
 
 # if we want to install via apt
 USER root
