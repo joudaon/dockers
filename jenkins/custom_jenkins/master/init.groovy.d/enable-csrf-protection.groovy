@@ -19,6 +19,8 @@
 import hudson.security.csrf.DefaultCrumbIssuer
 import jenkins.model.Jenkins
 
+println "--> Enabling CSRF protection"
+
 if(!Jenkins.instance.isQuietingDown()) {
     def j = Jenkins.instance
     if(j.getCrumbIssuer() == null) {

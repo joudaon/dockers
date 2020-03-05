@@ -1,7 +1,16 @@
+authorize-project
+blueocean
+docker-plugin
+docker-workflow
 git-userContent
+gradle
 greenballs
 locale
+nexus-artifact-uploader
+nexus-jenkins-plugin
 sidebar-link
 ssh-slaves
+ssh-steps
+terraform
 timestamper
 workflow-aggregator

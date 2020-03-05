@@ -1,4 +1,7 @@
 #!/usr/bin/env groovy
 
 import jenkins.model.*
-Jenkins.instance.setNumExecutors(0)
+
+println "--> Updating executors"
+
+Jenkins.instance.setNumExecutors(1)

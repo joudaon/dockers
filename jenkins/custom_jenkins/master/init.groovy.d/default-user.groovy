@@ -3,6 +3,8 @@
 import jenkins.model.*
 import hudson.security.*
 
+println "--> Enabling default user"
+
 def env = System.getenv()
 
 def jenkins = Jenkins.getInstance()
