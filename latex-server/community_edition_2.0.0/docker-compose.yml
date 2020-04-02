@@ -5,7 +5,7 @@ services:
     sharelatex:
         # Server Pro users:
         # image: quay.io/sharelatex/sharelatex-pro
-        image: sharelatex/sharelatex:2.0.2
+        image: sharelatex/sharelatex:2.2.0
         container_name: sharelatex
         mem_limit: 1g
         restart: always
