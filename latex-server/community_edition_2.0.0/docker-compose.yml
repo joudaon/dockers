@@ -1,11 +1,14 @@
-version: '2.2'
+version: '2.3'
+
 services:
+
     sharelatex:
-        restart: always
         # Server Pro users:
         # image: quay.io/sharelatex/sharelatex-pro
         image: sharelatex/sharelatex:2.0.2
         container_name: sharelatex
+        mem_limit: 1g
+        restart: always
         depends_on:
             mongo:
                 condition: service_healthy
@@ -89,11 +92,17 @@ services:
 
 
             # SHARELATEX_PROXY_LEARN: "true"
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "5"
 
     mongo:
+        image: mongo:4.2
+        container_name: sharelatex_mongo
+        mem_limit: 512m
         restart: always
-        image: mongo
-        container_name: mongo
         expose:
             - 27017
         volumes:
@@ -103,15 +112,26 @@ services:
             interval: 10s
             timeout: 10s
             retries: 5
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "5"
 
     redis:
+        image: redis:5.0
+        container_name: sharelatex_redis
+        mem_limit: 512m
         restart: always
-        image: redis
-        container_name: redis
         expose:
             - 6379
         volumes:
             - ./storeddata/redis_data:/data
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "5"
 
     # ldap:
     #    restart: always
