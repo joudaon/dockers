@@ -11,6 +11,7 @@
 
 - [Docker hub: sonarqube (Official Image)](https://hub.docker.com/_/sonarqube/)
 - [Docker hub: postgres (Official Image)](https://hub.docker.com/_/postgres)
+- [max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]](https://github.com/SonarSource/docker-sonarqube/issues/282)
 
 ## Information
 
