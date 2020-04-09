@@ -1,0 +1,52 @@
+version: '2.4'
+
+services:
+  gitlab-web:
+    image: gitlab/gitlab-ce:12.9.2-ce.0
+    container_name: gitlab-web
+    hostname: gitlab-web
+    mem_limit: 2560m
+    restart: always
+    volumes:
+      - ./storeddata/gitlab-config:/etc/gitlab
+      - ./storeddata/gitlab-logs:/var/log/gitlab
+      - ./storeddata/gitlab-data:/var/opt/gitlab
+    ports:
+      - '24:22'
+      - '8080:80'
+      - '443:443'
+      - '4567:4567'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['gitlab_shell_ssh_port'] = 24
+        registry_external_url 'http://localhost:4567'
+        registry['enable'] = true
+        unicorn['socket'] = '/opt/gitlab/var/unicorn/gitlab.socket'
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "20m"
+          max-file: "5"
+    networks:
+      - gitlab-network
+
+  gitlab-runner1:
+    image: gitlab/gitlab-runner:ubuntu-v12.9.0-rc2
+    container_name: gitlab-runner1
+    hostname: gitlab-runner1
+    mem_limit: 512m
+    restart: always
+    volumes:
+      - ./storeddata/gitlab-runner1-config:/etc/gitlab-runner:Z
+      - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "20m"
+          max-file: "5"
+    networks:
+      - gitlab-network
+
+networks:
+  gitlab-network:
+    name: gitlab-network
