@@ -2,10 +2,12 @@ version: '2.3'
                                                   
 services:   
   ubuntu:               
-    image: ubuntu:18.04
+    image: ubuntucustom:$UBUNTU_VERSION
     build:
       context: .
-    container_name: ubuntu-18.04
+      args:
+        UBUNTU_VERSION: $UBUNTU_VERSION
+    container_name: ubuntu
     hostname: ubuntu
     mem_limit: 2048m                           
     restart: always
