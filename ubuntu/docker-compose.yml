@@ -1,0 +1,16 @@
+version: '2.3'                                                                                                                                                                                              
+                                                  
+services:   
+  ubuntu:               
+    image: ubuntu:18.04
+    build:
+      context: .
+    container_name: ubuntu-18.04
+    hostname: ubuntu
+    mem_limit: 2048m                           
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
