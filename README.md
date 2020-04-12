@@ -77,4 +77,11 @@ $> docker build -t <imagename:tag> .
 
 ## Useful links:
 
+- [Install Docker Engine on Ubuntu | Docker Documentation](https://docs.docker.com/engine/install/ubuntu/)
+- [Install Docker Compose | Docker Documentation](https://docs.docker.com/compose/install/)
+- [Compose file version 3 reference | Docker Documentation](https://docs.docker.com/compose/compose-file/)
+- [Compose file version 2 reference | Docker Documentation](https://docs.docker.com/compose/compose-file/compose-file-v2/)
+- [Installing the Docker client on Windows Subsystem for Linux (Ubuntu)](https://medium.com/@sebagomez/installing-the-docker-client-on-ubuntus-windows-subsystem-for-linux-612b392a44c4)
+- [How To Change Docker Data Folder Configuration - Developer Space - Medium](https://medium.com/developer-space/how-to-change-docker-data-folder-configuration-33d372669056)
 - [HOW TO KEEP DOCKER CONTAINERS RUNNING](http://bigdatums.net/2017/11/07/how-to-keep-docker-containers-running/)
+- [What security concerns should I have with Docker? How should I go about locking it down? · Issue #17 · BretFisher/ama](https://github.com/BretFisher/ama/issues/17)
