@@ -18,3 +18,10 @@ services:
       - JUPYTER_ENABLE_LAB=yes
       - GRANT_SUDO=yes
     command: "start-notebook.sh --NotebookApp.password='sha1:1b05173510a1:64b02e937a1ef0d15930d8f0d3f1e94b04a1f8c7'" #Password1234!
+    healthcheck:
+      test: ps aux | grep start-notebook.sh | grep -v grep || exit 1
+      #test: ["CMD", "curl", "-f", "http://localhost:8888"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+
