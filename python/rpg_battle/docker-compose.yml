@@ -1,0 +1,16 @@
+version: '2.3'
+services:
+
+  rpg-battle:
+    image: rpg-battle
+    build:
+      context: .
+    container_name: rpg-battle
+    hostname: rpg-battle
+    mem_limit: 1024m
+    restart: always
+    healthcheck:
+      test: ps aux | grep "python ./main.py" | grep -v grep || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 5
