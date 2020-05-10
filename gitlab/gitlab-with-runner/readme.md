@@ -12,7 +12,9 @@
 ## Useful links
 
 - [GitLab Docker images](https://docs.gitlab.com/omnibus/docker/README.html)
-- [Dockerhub](https://hub.docker.com/r/gitlab/gitlab-ce/)
+- [Gitlab releases](https://about.gitlab.com/releases/categories/releases/)
+- [Dockerhub gitlab](https://hub.docker.com/r/gitlab/gitlab-ce/)
+- [Dockerhub gitlab runner](https://hub.docker.com/r/gitlab/gitlab-runner)
 - [Dockerfile gitlab](https://gitlab.com/gitlab-org/omnibus-gitlab/tree/master/docker)
 - [Run GitLab Runner in a container](https://docs.gitlab.com/runner/install/docker.html)
 - [Create a docker-compose file for fully running gitlab](https://gitlab.com/gitlab-org/gitlab-foss/issues/50851)
