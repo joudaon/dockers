@@ -23,6 +23,12 @@ $> sudo chmod 777 sonarqube_conf sonarqube_data sonarqube_extensions sonarqube_b
 $> sudo rm -rf sonarqube_conf sonarqube_data sonarqube_extensions sonarqube_bundled-plugins postgresql postgresql_data
 ```
 
+To fix "max virtual memory areas vm.max_map.count error, run the following as root user.
+
+```sh
+sysctl -w vm.max_map_count=262144
+```
+
 Default login credentials ([More information](https://docs.sonarqube.org/latest/instance-administration/security/)):
 
 user: admin
