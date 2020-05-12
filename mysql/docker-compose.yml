@@ -5,7 +5,7 @@ services:
     image: mysql:5.7
     container_name: mysql
     hostname: mysql
-    user: mysql
+    # user: mysql
     mem_limit: 2048m
     restart: always
     environment:
