@@ -1,0 +1,21 @@
+version: '2.3'                                                                                                                                                                                              
+                                                  
+services:   
+  vault:
+    image: vault
+    container_name: vault
+    hostname: vault
+    mem_limit: 2048m                             
+    restart: always
+    environment:
+      VAULT_ADDR: http://0.0.0.0:8200
+      VAULT_API_ADDR: http://0.0.0.0:8200
+    ports:
+      - 8200:8200
+    cap_add:
+      - IPC_LOCK
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
