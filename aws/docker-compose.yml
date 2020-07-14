@@ -1,0 +1,16 @@
+version: '2.3'
+services:
+
+  aws-cli: 
+    image: amazon/aws-cli
+    build:
+      context: dockerfile/
+    container_name: aws-cli
+    mem_limit: 2048m
+    restart: always
+    environment:
+      AWS_ACCESS_KEY_ID: <keyid>
+      AWS_SECRET_ACCESS_KEY: <secrekey>
+      AWS_DEFAULT_REGION: eu-west-1
+    volumes:
+      - ./aws_folder:/aws
