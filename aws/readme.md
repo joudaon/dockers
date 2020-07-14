@@ -20,6 +20,7 @@ $> docker-compose up -d
 $> docker-compose exec aws-cli /bin/bash
 # Inside container
 $> aws help
+$> aws iam create-user --user-name testuser
 ```
 
 ## Useful links
