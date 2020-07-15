@@ -33,6 +33,3 @@ $> vault status
 $> mkdir -p volumes/{config,data,logs,policies}
 $> sudo rm -rf volumes/{data,logs,policies}
 ```
-
-root token: s.nqDhiPajzDFiqmmazGk7Az2L
-key 1: Oj+tZLNuJcXWLxOPaI2sFtsvm3drVR0YW0rQ/kpYwI0=
