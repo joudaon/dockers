@@ -6,6 +6,7 @@
   - [TOC](#toc)
   - [Useful links](#useful-links)
   - [Information](#information)
+  - [Backup and restore gitlab](#backup-and-restore-gitlab)
     - [Example .gitlab-ci.yml](#example-gitlab-ciyml)
     - [Enabling JUnit reports](#enabling-junit-reports)
 
@@ -25,6 +26,19 @@
 ## Information
 
 Default gitlab username: root
+
+## Backup and restore gitlab
+
+```sh
+# Backup entire folder
+$> sudo tar -cpzf gitlab-backup-$(date +%F).tar .
+# Backup entire folder with verbose
+$> sudo tar -cpvzf gitlab-backup-$(date +%F).tar .
+# Restore tar file
+$> sudo tar --same-owner -xf gitlab-backup-$(date +%F)
+# Restore tar file with verbose
+$> sudo tar --same-owner -xvf gitlab-backup-$(date +%F)
+```
 
 ### Example .gitlab-ci.yml
 
