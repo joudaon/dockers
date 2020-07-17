@@ -2,7 +2,7 @@ version: '2.3'
 services:
 
   jenkins:
-    image: jenkins/jenkins:2.222.1
+    image: jenkins/jenkins:2.245
     container_name: jenkins
     mem_limit: 2048m
     restart: always

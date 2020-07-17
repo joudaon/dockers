@@ -41,8 +41,3 @@ Jenkins.instance.pluginManager.plugins.each{
     println ("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}")
 }
 ```
-
-## Connecting slaves (ssh-slave)
-
-- In the Jenkins Master UI, go to: Manage Jenkins / Nodes / Add new node
-- Add your host (hostname = jenkins-ssh-slave) with credentials: user-root / password jenkins

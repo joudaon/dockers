@@ -1,4 +1,9 @@
-FROM jenkins/jenkins:2.204.4
+ARG JENKINS_VERSION
+
+FROM jenkins/jenkins:$JENKINS_VERSION
+
+ARG JENKINS_USER 
+ARG JENKINS_PASS
 
 # if we want to install via apt
 USER root
@@ -11,8 +16,8 @@ USER jenkins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
-ENV JENKINS_USER admin
-ENV JENKINS_PASS admin
+ENV JENKINS_USER $JENKINS_USER
+ENV JENKINS_PASS $JENKINS_PASS
 
 # '*.groovy' files placed at /usr/share/jenkins/ref/init.groovy.d/
 # will execute custom configurations settings

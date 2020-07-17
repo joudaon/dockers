@@ -2,9 +2,13 @@ version: '2.3'
 services:
 
   jenkins-master:
-    image: jenkins-master:2.204.4
+    image: jenkins-master:$JENKINS_VERSION
     build:
       context: master/
+      args:
+        JENKINS_VERSION: $JENKINS_VERSION
+        JENKINS_USER: $JENKINS_USER
+        JENKINS_PASS: $JENKINS_PASS
     container_name: jenkins-master
     hostname: jenkins-master
     mem_limit: 2048m
@@ -24,7 +28,7 @@ services:
         max-file: "5"
   
   jenkins-ssh-slave:
-    image: jenkins-ssh-slave:2.204.4
+    image: jenkins-ssh-slave:$JENKINS_VERSION
     build:
       context: ssh-slave/
     container_name: jenkins-ssh-slave
