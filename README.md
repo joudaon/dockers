@@ -1,6 +1,10 @@
 # DOCKERS
 
-Useful docker-compose files with different services.
+The aim of this repository is to collect useful docker-compose files with different services so that they can help other developers to ease their work.
+
+Feel free to add your own or someone else's docker-compose files.
+
+Don't forget to leave a ⭐ if you found this useful.
 
 ## TOC
 
