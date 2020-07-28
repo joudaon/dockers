@@ -10,6 +10,8 @@ In this example we are going to create two identical Apache servers and one HAPr
 2. HAProxy container calls either Apache container 1 or 2.
 3. Response is served by Apache container 1 or 2.
 
+You can access to HAProxy GUI via http://localhost/haproxy?stats and login with admin:admin.
+
 ## Testing load balacing via curl
 
 ```sh
