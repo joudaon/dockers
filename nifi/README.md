@@ -9,11 +9,43 @@ The data processing be like getting data from some rest API, converting the fiel
 - [nifi](#nifi)
   - [TOC](#toc)
   - [How to deploy](#how-to-deploy)
+  - [Templates](#templates)
+  - [File transfer example](#file-transfer-example)
   - [Useful links](#useful-links)
 
 ## How to deploy
 
 Deploy `docker-compose.yml` file and then access the web UI on: `http://localhost:8080/nifi`. Maybe you have to wait for a while.
+
+## Templates
+
+There is a `templates` folder. These templates can be imported into Nifi. These templates can be donwload from [this](https://cwiki.apache.org/confluence/display/NIFI/Example+Dataflow+Templates) url. Also you can create your own ones and save them.
+
+## File transfer example
+
+This is a simple example that demonstrates how to transfer files inside a folder from source folder to a destination folder.
+
+To do so, we have mounted `storeddata/input` and `storeddata/output` folders to docker. These folders need to be created before running `docker-compose` to get right permissions inside the container.
+
+```sh
+$> mkdir -p storeddata/input storeddata/output
+```
+
+Next, we deploy the container:
+
+```sh
+$> docker-compose up -d
+```
+
+On the NiFi UI we import `Get_and_Put_file.xml` and we start both `Processors` (`GetFile` and `PutFile`).
+
+Now we have to place files into `storeddata/input` folder. We can do it with the following command:
+
+```sh
+$> for i in {1..5}; do echo "Hello world $i" > storeddata/input/test$i.txt; sleep 5 ; done
+```
+
+This will place 5 files inside `storeddata/input` and will be consumed and moved to `storeddata/output` folder.
 
 ## Useful links
 

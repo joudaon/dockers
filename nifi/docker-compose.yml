@@ -10,6 +10,9 @@ services:
     restart: always
     ports: 
       - 8080:8080
+    volumes:
+      - ./storeddata/input:/storeddata/input
+      - ./storeddata/output:/storeddata/output
     logging:
       driver: "json-file"
       options:
