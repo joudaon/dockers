@@ -9,13 +9,37 @@ The data processing be like getting data from some rest API, converting the fiel
 - [nifi](#nifi)
   - [TOC](#toc)
   - [How to deploy](#how-to-deploy)
+    - [Single node mode](#single-node-mode)
+    - [Cluster mode](#cluster-mode)
+      - [Version 1](#version-1)
+      - [Version 2](#version-2)
   - [Templates](#templates)
   - [File transfer example](#file-transfer-example)
   - [Useful links](#useful-links)
 
 ## How to deploy
 
+### Single node mode
+
 Deploy `docker-compose.yml` file and then access the web UI on: `http://localhost:8080/nifi`. Maybe you have to wait for a while.
+
+### Cluster mode
+
+When deploying NiFi on `cluster mode` data on the UI should be replicated among all the replicas.
+
+#### Version 1
+
+Deploy cluster with the following command:
+
+```sh
+$> docker-compose up --scale nifi=3 -d
+```
+
+Then access web UI on: `http://localhost:32771/nifi/` after waiting for a while.
+
+#### Version 2
+
+Deploy `docker-compose.yml` file and then access the web UI on: `http://localhost:{8080:8081:8082}/nifi`. Maybe you have to wait for a while.
 
 ## Templates
 
@@ -53,3 +77,4 @@ This will place 5 files inside `storeddata/input` and will be consumed and moved
 - [Docker hub](https://hub.docker.com/r/apache/nifi)
 - [Running NIFI in docker using docker-compose](https://medium.com/@erbalvindersingh/running-nifi-in-docker-using-docker-compose-34032de853d2)
 - [Running a cluster with Apache Nifi and Docker](https://www.theninjacto.xyz/Running-cluster-Apache-Nifi-Docker/)
+- [Running a cluster with Apache Nifi and Docker](https://www.nifi.rocks/apache-nifi-docker-compose-cluster/)
