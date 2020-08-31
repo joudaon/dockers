@@ -78,3 +78,4 @@ This will place 5 files inside `storeddata/input` and will be consumed and moved
 - [Running NIFI in docker using docker-compose](https://medium.com/@erbalvindersingh/running-nifi-in-docker-using-docker-compose-34032de853d2)
 - [Running a cluster with Apache Nifi and Docker](https://www.theninjacto.xyz/Running-cluster-Apache-Nifi-Docker/)
 - [Running a cluster with Apache Nifi and Docker](https://www.nifi.rocks/apache-nifi-docker-compose-cluster/)
+- [apache-nifi-templates](https://github.com/learnwithmanoj/apache-nifi-templates)
