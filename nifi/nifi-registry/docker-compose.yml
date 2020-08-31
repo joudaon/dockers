@@ -1,0 +1,21 @@
+version: '2.3'
+
+services:
+
+  nifi-registry:
+    image: apache/nifi-registry
+    container_name: nifi-registry
+    hostname: nifi-registry
+    mem_limit: 2048m
+    restart: always
+    ports: 
+      - 18080:18080
+    volumes:
+      # Volumes for data input & output
+      - ./storeddata/input:/storeddata/input
+      - ./storeddata/output:/storeddata/output
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
