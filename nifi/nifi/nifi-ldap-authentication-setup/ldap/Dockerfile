@@ -5,5 +5,5 @@ LABEL maintainer="Junhong Liang"
 
 ARG SECRET_DIR="./secrets"
 
-ADD ${SECRET_DIR}/*.ldif /container/service/slapd/assets/config/bootstrap/ldif/custom/
+COPY ${SECRET_DIR}/*.ldif /container/service/slapd/assets/config/bootstrap/ldif/custom/
 
