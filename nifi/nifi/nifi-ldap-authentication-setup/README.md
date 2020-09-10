@@ -5,6 +5,7 @@
   - [Advanced](#advanced)
       - [Putting Files into Nifi](#putting-files-into-nifi)
   - [Notes](#notes)
+  - [Login ldapadmin](#login-ldapadmin)
   - [Useful links](#useful-links)
 
 ** NOTE: This repository has been cloned from [this one](https://github.com/linksmart/nifi-ldap-authentication-setup).
@@ -99,8 +100,16 @@ Here is something I learned, which is not clearly documented in official documen
 
 3. The file `ldap/secrets/users.ldif` specifies the Nifi admin account, e.g. `uid=admin,ou=people,dc=fraunhofer,dc=de`. This DN needs to be added to Nifi as the initial admin identity by setting the environment variable `INITIAL_ADMIN_IDENTITY` to this DN for the Nifi container.
 
+## Login ldapadmin
 
-## Useful links 
+To login into ldap UI please go to: `https://localhost:6443` and use following credentials.
+
+```
+User: uid=admin,ou=system,dc=example,dc=com
+Password: fraunhofer
+```
+
+## Useful links
 
 - [Integration of NiFi with LDAP](https://pierrevillard.com/2017/01/24/integration-of-nifi-with-ldap/comment-page-1/)
 - [Setup LDAP for Apache Nifi](https://vanducng.dev/2019/11/20/Setup-LDAP-for-Apache-Nifi/)

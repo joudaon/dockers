@@ -15,15 +15,18 @@ services:
     networks:
       - nifi
 
-#  ldapadmin:
-#    image: osixia/phpldapadmin
-#    restart: always
-#    environment:
-#    - PHPLDAPADMIN_LDAP_HOSTS=ldap
-#    ports:
-#    - 8443:443
-#    networks:
-#    - nifi
+  ldapadmin:
+    image: osixia/phpldapadmin
+    container_name: ldapadmin
+    hostname: ldapadmin
+    mem_limit: 2048m
+    restart: always
+    environment:
+    - PHPLDAPADMIN_LDAP_HOSTS=ldap
+    ports:
+    - 6443:443
+    networks:
+    - nifi
 
   nifi:
     container_name: nifi
