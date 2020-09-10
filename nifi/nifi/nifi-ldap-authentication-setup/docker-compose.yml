@@ -1,0 +1,59 @@
+version: "3"
+
+services:
+
+  ldap:
+    container_name: ldap
+    hostname: ldap
+    build: ./ldap
+    mem_limit: 2048m
+    restart: always
+    environment:
+      - LDAP_ADMIN_PASSWORD=${LDAP_ADMIN_PASSWORD}
+      - LDAP_ORGANISATION=${LDAP_ORGANISATION}
+      - LDAP_DOMAIN=${LDAP_DOMAIN}
+    networks:
+      - nifi
+
+#  ldapadmin:
+#    image: osixia/phpldapadmin
+#    restart: always
+#    environment:
+#    - PHPLDAPADMIN_LDAP_HOSTS=ldap
+#    ports:
+#    - 8443:443
+#    networks:
+#    - nifi
+
+  nifi:
+    container_name: nifi
+    hostname: nifi
+    build: ./nifi
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - ${NIFI_PORT}:8443
+    environment:
+      - AUTH=ldap
+      - KEYSTORE_PATH=/opt/secrets/keystore.jks
+      - KEYSTORE_TYPE=JKS
+      - KEYSTORE_PASSWORD=${NIFI_KEYSTORE_PASS}
+      - TRUSTSTORE_PATH=/opt/secrets/truststore.jks
+      - TRUSTSTORE_PASSWORD=${NIFI_TRUSTSTORE_PASS}
+      - TRUSTSTORE_TYPE=JKS
+      - INITIAL_ADMIN_IDENTITY=${NIFI_INITIAL_ADMIN_IDENTITY}
+      - LDAP_AUTHENTICATION_STRATEGY=SIMPLE
+      - LDAP_MANAGER_DN=${NIFI_LDAP_MANAGER_DN}
+      - LDAP_MANAGER_PASSWORD=${NIFI_LDAP_MANAGER_PASSWORD}
+      - LDAP_USER_SEARCH_BASE=${NIFI_LDAP_USER_SEARCH_BASE}
+      - LDAP_USER_SEARCH_FILTER=uid={0}
+      - LDAP_IDENTITY_STRATEGY=USE_DN
+      - LDAP_URL=ldap://ldap:389
+      - NIFI_WEB_PROXY_HOST=${NIFI_HOST}:${NIFI_PORT}
+      - NIFI_WEB_HTTP_HOST=${NIFI_HOST}
+      - NIFI_REMOTE_INPUT_HOST=${NIFI_HOST}
+    networks:
+      - nifi
+ 
+networks:
+  nifi:
