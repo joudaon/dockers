@@ -53,12 +53,12 @@ The script will will do the following for you:
 
 After it finishes, you can need to build the images:
 ```bash
-docker-compose -p example_project build --no-cache --force-rm
+docker-compose build --no-cache --force-rm
 ```
 
 Bring up the stack:
 ```bash
-docker-compose -p example_project  up --detach --force-recreate
+docker-compose up --detach --force-recreate
 ```
 
 Now a secure Nifi instance has been started and you can visit it here (the `port` depends on your configuration in the setup script). Log in with the credential you specified in the setup script:
