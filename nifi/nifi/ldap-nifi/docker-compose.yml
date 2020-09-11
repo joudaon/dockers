@@ -1,0 +1,98 @@
+version: "2.3"
+
+services:
+
+  openldap:
+    image: osixia/openldap:latest
+    container_name: openldap
+    domainname: example.org
+    hostname: openldap
+    mem_limit: 2048m
+    environment:
+      LDAP_LOG_LEVEL: "256"
+      LDAP_ORGANISATION: "Example Inc."
+      LDAP_DOMAIN: "example.org"
+      LDAP_BASE_DN: "dc=example,dc=org"
+      LDAP_ADMIN_PASSWORD: "admin"
+      LDAP_CONFIG_PASSWORD: "config"
+      LDAP_READONLY_USER: "false"
+      LDAP_READONLY_USER_USERNAME: "readonly"
+      LDAP_READONLY_USER_PASSWORD: "readonly"
+      LDAP_RFC2307BIS_SCHEMA: "false"
+      LDAP_BACKEND: "mdb"
+      LDAP_TLS: "true"
+      LDAP_TLS_CRT_FILENAME: "ldap.crt"
+      LDAP_TLS_KEY_FILENAME: "ldap.key"
+      LDAP_TLS_CA_CRT_FILENAME: "ca.crt"
+      LDAP_TLS_ENFORCE: "false"
+      LDAP_TLS_CIPHER_SUITE: "SECURE256:-VERS-SSL3.0"
+      LDAP_TLS_PROTOCOL_MIN: "3.1"
+      LDAP_TLS_VERIFY_CLIENT: "demand"
+      LDAP_REPLICATION: "false"
+      #LDAP_REPLICATION_CONFIG_SYNCPROV: "binddn="cn=admin,cn=config" bindmethod=simple credentials=$LDAP_CONFIG_PASSWORD searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical"
+      #LDAP_REPLICATION_DB_SYNCPROV: "binddn="cn=admin,$LDAP_BASE_DN" bindmethod=simple credentials=$LDAP_ADMIN_PASSWORD searchbase="$LDAP_BASE_DN" type=refreshAndPersist interval=00:00:00:10 retry="60 +" timeout=1 starttls=critical"
+      #docker-compose.ymlLDAP_REPLICATION_HOSTS: "#PYTHON2BASH:['ldap://ldap.example.org','ldap://ldap2.example.org']"
+      KEEP_EXISTING_CONFIG: "false"
+      LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+      LDAP_SSL_HELPER_PREFIX: "ldap"
+    tty: true
+    stdin_open: true
+    volumes:
+      - /var/lib/ldap
+      - /etc/ldap/slapd.d
+      - /container/service/slapd/assets/certs/
+    ports:
+      - 389:389
+      - 636:636
+    networks:
+      - nifi
+
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    container_name: phpldapadmin
+    hostname: phpldapadmin
+    mem_limit: 2048m
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+      PHPLDAPADMIN_HTTPS: "false"
+    ports:
+      - 8080:80
+    depends_on:
+      - openldap
+    networks:
+      - nifi
+
+  nifi:
+    image: apache/nifi:latest
+    container_name: nifi
+    hostname: nifi
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 8443:8443
+    volumes:
+      - ./nifi/secrets:/opt/certs
+    environment:
+      AUTH: ldap
+      KEYSTORE_PATH: /opt/certs/keystore.jks
+      KEYSTORE_TYPE: JKS
+      KEYSTORE_PASSWORD: tfZhY1VbVoZx0VtS0voDKxwAefHdpMDJ
+      TRUSTSTORE_PATH: /opt/certs/truststore.jks
+      TRUSTSTORE_PASSWORD: vqLrLO60Vy2b9qkHfaaHYL4GSC6fMKTi
+      TRUSTSTORE_TYPE: JKS
+      INITIAL_ADMIN_IDENTITY: cn=admin,dc=example,dc=org
+      LDAP_AUTHENTICATION_STRATEGY: SIMPLE
+      LDAP_MANAGER_DN: cn=admin,dc=example,dc=org
+      LDAP_MANAGER_PASSWORD: admin
+      LDAP_USER_SEARCH_BASE: dc=example,dc=org
+      LDAP_USER_SEARCH_FILTER: cn={0}
+      LDAP_IDENTITY_STRATEGY: USE_DN
+      LDAP_URL: ldap://openldap:389
+      NIFI_WEB_PROXY_HOST: host-01:8443
+      NIFI_WEB_HTTP_HOST: host-01
+      NIFI_REMOTE_INPUT_HOST: host-01
+    networks:
+      - nifi
+
+networks:
+  nifi:
