@@ -11,7 +11,7 @@
 To login into ldap UI please go to: `http://localhost:8080` and use following credentials.
 
 ```
-User: uid=admin,ou=system,dc=example,dc=com
+User: cn=admin,dc=example,dc=org
 Password: admin
 ```
 

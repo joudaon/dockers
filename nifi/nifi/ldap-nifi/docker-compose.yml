@@ -88,11 +88,12 @@ services:
       LDAP_USER_SEARCH_FILTER: cn={0}
       LDAP_IDENTITY_STRATEGY: USE_DN
       LDAP_URL: ldap://openldap:389
-      NIFI_WEB_PROXY_HOST: host-01:8443
-      NIFI_WEB_HTTP_HOST: host-01
-      NIFI_REMOTE_INPUT_HOST: host-01
+      # NIFI_WEB_PROXY_HOST: host-01:8443
+      # NIFI_WEB_HTTP_HOST: host-01
+      # NIFI_REMOTE_INPUT_HOST: host-01
     networks:
       - nifi
 
 networks:
   nifi:
+    # driver: bridge
