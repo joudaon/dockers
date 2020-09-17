@@ -7,6 +7,7 @@
   - [What is Jupyter?](#what-is-jupyter)
   - [Preparing storeddata folder](#preparing-storeddata-folder)
   - [Creating a token with a password](#creating-a-token-with-a-password)
+  - [See functions arguments](#see-functions-arguments)
   - [Enabling docker inside the container](#enabling-docker-inside-the-container)
   - [Docker useful links](#docker-useful-links)
 
@@ -29,6 +30,11 @@ Enter password:
 Verify password:
 Out[2]: 'sha1:67c9e60bb8b6:9ffede0825894254b2e042ea597d771089e11aed'
 ```
+
+## See functions arguments
+
+Press `shift-tab` to display documentation.
+
 
 ## Enabling docker inside the container
 
@@ -87,3 +93,4 @@ More information [here](https://stackoverflow.com/questions/48957195/how-to-fix-
 - [Jupyter Docker Stacks](https://github.com/jupyter/docker-stacks)
 - [mikebirdgeneau/jupyterlab](https://hub.docker.com/r/mikebirdgeneau/jupyterlab)
 - [The Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/latest/index.html)
+- [How can I see function arguments in IPython Notebook Server 3?](https://stackoverflow.com/questions/30855169/how-can-i-see-function-arguments-in-ipython-notebook-server-3)
