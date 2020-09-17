@@ -76,7 +76,7 @@ services:
     ports:
       - 8443:8443
     volumes:
-      - ./nifi/secrets:/opt/certs
+      - ./nifi/certs:/opt/certs
     environment:
       AUTH: ldap
       KEYSTORE_PATH: /opt/certs/keystore.jks
