@@ -1,3 +1,6 @@
+# docker ignore items:
+persistence_data/
+
 # Custom ignore items:
 nifi/secrets/*.jks
 ldap/secrets/*.ldif

@@ -38,9 +38,9 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - /var/lib/ldap
-      - /etc/ldap/slapd.d
-      - /container/service/slapd/assets/certs/
+      - ./persistence_data/ldap:/var/lib/ldap
+      - ./persistence_data/slapd.d:/etc/ldap/slapd.d
+      - ./openldap/certs:/container/service/slapd/assets/certs/
     ports:
       - 389:389
       - 636:636
