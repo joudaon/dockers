@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   gitlab:
-    image: 'gitlab/gitlab-ce:latest'
+    image: gitlab/gitlab-ce:13.4.0-ce.0
     container_name: gitlab
     mem_limit: 2048m
     restart: always
