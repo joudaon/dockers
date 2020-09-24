@@ -6,8 +6,10 @@
   - [TOC](#toc)
   - [Information](#information)
     - [Example .gitlab-ci.yml](#example-gitlab-ciyml)
-    - [Enabling JUnit reports](#enabling-junit-reports)
   - [Backup and restore gitlab](#backup-and-restore-gitlab)
+  - [Gitlab tricks](#gitlab-tricks)
+    - [Enabling JUnit reports](#enabling-junit-reports)
+    - [Exporting and importing a gitlab project from one server to another](#exporting-and-importing-a-gitlab-project-from-one-server-to-another)
   - [Useful links](#useful-links)
 
 ## Information
@@ -31,16 +33,6 @@ build:
     - docker ps -a
 ```
 
-### Enabling JUnit reports
-
-Inside "gitlab-web" container run the following (more info [here](https://docs.gitlab.com/ee/ci/junit_test_reports.html)):
-
-```sh
-$> gitlab-rails console
-# Indise console
-$> Feature.enable(:junit_pipeline_view)
-```
-
 ## Backup and restore gitlab
 
 ```sh
@@ -53,6 +45,28 @@ $> sudo tar --same-owner -xf gitlab-backup-$(date +%F)
 # Restore tar file with verbose
 $> sudo tar --same-owner -xvf gitlab-backup-$(date +%F)
 ```
+
+## Gitlab tricks
+
+### Enabling JUnit reports
+
+Inside "gitlab-web" container run the following (more info [here](https://docs.gitlab.com/ee/ci/junit_test_reports.html)):
+
+```sh
+$> gitlab-rails console
+# Indise console
+$> Feature.enable(:junit_pipeline_view)
+```
+
+### Exporting and importing a gitlab project from one server to another
+
+On the origin repository go to `Settings > General > Advanced` and select `Export project`. Wait and refresh and you will see a `Download export` button which will donwload a `*.tar.gz` file.
+
+On the target repository select `Import project > GitLab Export`. Upload previosly downloaded `*.tar.gz` file.
+
+NOTE: If you face `Request Entity Too large` error, please go to: `Admin Area > Settings > General > Account and limit` and update `Maximum import size (MB)` field.
+
+More info [here](https://docs.gitlab.com/ee/user/project/settings/import_export.html) and [here](https://docs.gitlab.com/ee/user/admin_area/settings/account_and_limit_settings.html).
 
 ## Useful links
 
