@@ -8,7 +8,7 @@
 
 ## Login ldapadmin
 
-To login into ldap UI please go to: `http://localhost:8080` and use following credentials.
+To login into ldap UI please go to: `https://localhost:6443` and use following credentials.
 
 ```
 User: cn=admin,dc=example,dc=org
