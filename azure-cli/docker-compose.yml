@@ -1,0 +1,15 @@
+version: '2.3'
+services:
+
+  azure-cli: 
+    image: azure/az-cli
+    build:
+      context: dockerfile/
+    container_name: azure-cli
+    mem_limit: 2048m
+    restart: always
+    environment:
+      AZ_USERNAME: <az_username>
+      AZ_PASSWORD: <az_password>
+    volumes:
+      - ./az_folder:/az
