@@ -3,6 +3,7 @@
 - [ldap-phpldapadmin](#ldap-phpldapadmin)
   - [Information](#information)
   - [Login information](#login-information)
+  - [How to deploy](#how-to-deploy)
   - [Useful links](#useful-links)
 
 ## Information
@@ -14,6 +15,18 @@ OpenLDAP Software is an open source implementation of the Lightweight Directory 
 Login:cn=admin,dc=example,dc=org
 
 Password:"admin"
+
+## How to deploy 
+
+Deploy the `docker-compose` file
+
+```sh
+$> docker-compose up -d
+```
+
+Go to `http://localhost:8080` and login with above mentioned credentials.
+
+There is a `sample.ldif` file which can be imported on the UI, under `import` option.
 
 ## Useful links
 
