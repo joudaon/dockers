@@ -1,0 +1,29 @@
+version: '2.3'
+services:
+
+  odoo:
+    image: odoo:12.0
+    container_name: odoo
+    hostname: odoo
+    mem_limit: 2048m
+    depends_on:
+      - db
+    ports:
+      - 8069:8069
+    # volumes:
+    #   - ./odoo/odoo-web-data:/var/lib/odoo
+    #   - ./odoo/config:/etc/odoo
+    #   - ./odoo/addons:/mnt/extra-addons
+
+  db:
+    image: postgres:10
+    container_name: db
+    hostname: db
+    mem_limit: 2048m
+    environment:
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    # volumes:
+    #   - ./postgres/odoo-db-data:/var/lib/postgresql/data/pgdata
