@@ -2,7 +2,7 @@ version: '2.3'
 
 services:
   nexus3:
-    image: sonatype/nexus3
+    image: sonatype/nexus3:3.28.1
     container_name: nexus3
     mem_limit: 2048m
     restart: always
