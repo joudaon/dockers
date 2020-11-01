@@ -2,14 +2,14 @@ version: '2.3'
 services:
 
   jenkins:
-    image: jenkins/jenkins:2.245
+    image: jenkins/jenkins:2.249.2-lts
     container_name: jenkins
     mem_limit: 2048m
     restart: always
     ports:
-      - '8080:8080'
-      - '443:443'
-      - '50000:50000' #build executors port
+      - 8080:8080
+      - 443:443
+      - 50000:50000 #build executors port
     volumes:
       - ./jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
