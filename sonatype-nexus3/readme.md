@@ -54,9 +54,18 @@ To make Docker repository work, please follow these steps:
     }
     ```
 4. Login into the docker repository:
+  
     ```sh
     $> docker login -u <username> http://<nexus-server-ip>:5000
     ```
+
+5. Pushing image
+
+    ```sh
+    $> docker pull hello-world
+    $> docker tag hello-world:latest <nexusip>:5000/repository/docker-master/hello-world:latest
+    $> docker push <nexusip>:5000/repository/docker-master/hello-world:latest
+    ``` 
 
 ### File upload
 
