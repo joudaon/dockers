@@ -106,7 +106,7 @@ $> db.users.find().pretty()
 
 Overleaf Community Edition 2.0.0 has been released, including TexLive 2019 by default.
 
-When everything is up go to: http://localhost/launchpad to set up admin user.
+When everything is up go to: `http://localhost/launchpad` to set up admin user.
 
 ## Useful links
 
