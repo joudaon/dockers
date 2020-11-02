@@ -27,6 +27,8 @@ services:
         ####             socket, required for Sibling Containers to work    ####
         ########################################################################
         # - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - sharelatex_net
     environment:
       SHARELATEX_APP_NAME: Overleaf Community Edition
       SHARELATEX_MONGO_URL: mongodb://mongo/sharelatex
@@ -86,27 +88,36 @@ services:
       # SHARELATEX_PROXY_LEARN: "true"
 
   mongo:
-    restart: always
-    image: mongo
+    image: mongo:latest
     container_name: mongo
+    mem_limit: 1024m
+    restart: always
     expose:
       - 27017
     volumes:
       - ./storeddata/mongo_data:/data/db
+      - ./storeddata/mongodb/mongo-config:/data/configdb
     healthcheck:
       test: echo 'db.stats().ok' | mongo localhost:27017/test --quiet
       interval: 10s
       timeout: 10s
       retries: 5
+    networks:
+      - sharelatex_net
 
   redis:
-    restart: always
     image: redis:5
     container_name: redis
+    hostname: redis
+    mem_limit: 1024m
+    restart: always
     expose:
       - 6379
     volumes:
+      - ./storeddata/redis/redis-data:/redis-data
       - ./storeddata/redis_data:/data
+    networks:
+      - sharelatex_net
 
   # ldap:
   #  restart: always
@@ -129,3 +140,8 @@ services:
   #   volumes:
   #     - /var/run/docker.sock:/tmp/docker.sock:ro
   #     - /home/sharelatex/tmp:/etc/nginx/certs
+
+networks:
+
+  sharelatex_net:
+    driver: bridge
