@@ -1,0 +1,13 @@
+version: '2.3'
+services:
+
+  python3:
+    image: python3
+    build:
+      context: .
+    container_name: python3
+    hostname: python3
+    mem_limit: 1024m
+    restart: always
+    volumes:
+      - ./python_files:/python_files
