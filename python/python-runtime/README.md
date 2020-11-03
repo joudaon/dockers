@@ -34,6 +34,12 @@ Pandas are turning up to be the most popular Python library that is used for dat
 3. **[Matplotlib](https://matplotlib.org/)**  
 Matplotlib is a data visualization library that is used for 2D plotting to produce publication-quality image plots and figures in a variety of formats. The library helps to generate histograms, plots, error charts, scatter plots, bar charts with just a few lines of code. 
 
+4. **[Seaborn](https://seaborn.pydata.org/)**
+Seaborn is a Python data visualization library based on matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics.
+
+5. **[Scipy](https://www.scipy.org/)**
+SciPy (pronounced “Sigh Pie”) is a Python-based ecosystem of open-source software for mathematics, science, and engineering.
+
 ### Databases
 
 1. **[psycopg2](https://www.psycopg.org/)**  
