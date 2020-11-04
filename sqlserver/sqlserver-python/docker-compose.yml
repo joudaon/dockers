@@ -1,0 +1,29 @@
+version: '2.3'
+
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    hostname: sqlserver
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password1234!"
+    volumes:
+      - ./mssql:/var/opt/mssql
+    # healthcheck:
+    #   test: [ "CMD", "sqlcmd", "-U", "sa", "-P", "Password1234!", "-Q", "select 1" ]
+    #   interval: 1s
+    #   retries: 20
+
+  python:
+    image: python
+    build:
+      context: .
+    container_name: python
+    hostname: python
+    mem_limit: 1024m
+    restart: 'no'
