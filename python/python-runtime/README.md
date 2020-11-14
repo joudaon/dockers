@@ -40,6 +40,11 @@ Seaborn is a Python data visualization library based on matplotlib. It provides 
 5. **[Scipy](https://www.scipy.org/)**  
 SciPy (pronounced “Sigh Pie”) is a Python-based ecosystem of open-source software for mathematics, science, and engineering.
 
+### Machine learning
+
+1. **[scikit-learn](https://scikit-learn.org/stable/)**  
+Scikit-learn (formerly scikits.learn and also known as sklearn) is a free software machine learning library for the Python programming language.[2] It features various classification, regression and clustering algorithms including support vector machines, random forests, gradient boosting, k-means and DBSCAN, and is designed to interoperate with the Python numerical and scientific libraries NumPy and SciPy. 
+
 ### Databases
 
 1. **[psycopg2](https://www.psycopg.org/)**  
