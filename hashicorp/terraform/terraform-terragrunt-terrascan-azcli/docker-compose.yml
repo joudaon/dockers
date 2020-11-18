@@ -1,0 +1,25 @@
+version: '2.3'                                                                                                                                                                                              
+                                                  
+services:   
+  terraform:
+    image: terraform:$TERRAFORM_VERSION         
+    build:
+      context: dockerfile/
+      args:
+        TERRAFORM_VERSION: $TERRAFORM_VERSION
+        TERRAGRUNT_VERSION: $TERRAGRUNT_VERSION
+        TERRASCAN_VERSION: $TERRASCAN_VERSION
+    container_name: terraform
+    hostname: terraform
+    mem_limit: 2048m                             
+    restart: always
+    environment:
+      AZ_USERNAME: $AZ_USERNAME
+      AZ_PASSWORD: $AZ_PASSWORD
+    volumes:
+      - ./terraform:/terraform
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
