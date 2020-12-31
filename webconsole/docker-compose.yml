@@ -1,0 +1,16 @@
+version: '2.3'
+services:
+
+  # https://hub.docker.com/r/cdue/webconsole
+  webconsole : 
+    image: cdue/webconsole:latest
+    build:
+      context: .
+    container_name: webconsole
+    mem_limit: 2048m
+    restart: always
+    environment:
+      TERMINAL_USERNAME: admin
+      TERMINAL_PASSWORD: admin
+    ports:
+      - 80:80
