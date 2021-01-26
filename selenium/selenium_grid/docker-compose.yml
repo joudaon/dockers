@@ -1,0 +1,60 @@
+# To execute this docker-compose yml file use `docker-compose -f docker-compose-v3.yml up`
+# Add the `-d` flag at the end for detached execution
+# To stop the execution, hit Ctrl+C, and then `docker-compose -f docker-compose-v3.yml down`
+version: '2.3'
+services:
+  chrome:
+    image: selenium/node-chrome:4.0.0-beta-1-prerelease-20210114
+    mem_limit: 1024m
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - 6900:5900
+
+  firefox:
+    image: selenium/node-firefox:4.0.0-beta-1-prerelease-20210114
+    mem_limit: 1024m
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - 6901:5900
+
+  opera:
+    image: selenium/node-opera:4.0.0-beta-1-prerelease-20210114
+    mem_limit: 1024m
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - 6902:5900
+
+  selenium-hub:
+    image: selenium/hub:4.0.0-beta-1-prerelease-20210114
+    container_name: selenium-hub
+    mem_limit: 1024m
+    ports:
+      - 4442:4442
+      - 4443:4443
+      - 4444:4444
+
+  python3:
+    image: python3
+    build:
+      context: python/
+    container_name: python3
+    hostname: python3
+    mem_limit: 1024m
+    restart: always
+    volumes:
+      - ./python/python_files:/python_files
