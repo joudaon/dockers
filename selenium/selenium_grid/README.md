@@ -25,3 +25,4 @@ $> python3 test.py
 - [Selenium Grid With Docker](https://medium.com/@nitinbhardwaj6/selenium-grid-with-docker-c8ecb0d8404)
 - [Getting Started with Docker Compose](https://github.com/SeleniumHQ/docker-selenium/wiki/Getting-Started-with-Docker-Compose)
 - [Docker images for the Selenium Grid Server](https://github.com/SeleniumHQ/docker-selenium)
+- [docker-selenium/docker-compose-v2.yml](https://github.com/SeleniumHQ/docker-selenium/blob/trunk/docker-compose-v2.yml)
