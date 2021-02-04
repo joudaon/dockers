@@ -6,7 +6,7 @@ Deploy the environment:
 $> docker-compose up -d
 ```
 
-Go to: `http://localhost:4444/wd/hub`
+Go to: `http://localhost:4444/ui/index.html#/`
 
 Go into python container:
 

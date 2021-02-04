@@ -4,6 +4,7 @@
 version: '2.3'
 services:
   chrome:
+    container_name: chrome
     image: selenium/node-chrome:4.0.0-beta-1-prerelease-20210114
     mem_limit: 1024m
     depends_on:
@@ -16,6 +17,7 @@ services:
       - 6900:5900
 
   firefox:
+    container_name: firefox
     image: selenium/node-firefox:4.0.0-beta-1-prerelease-20210114
     mem_limit: 1024m
     depends_on:
@@ -28,6 +30,7 @@ services:
       - 6901:5900
 
   opera:
+    container_name: opera
     image: selenium/node-opera:4.0.0-beta-1-prerelease-20210114
     mem_limit: 1024m
     depends_on:
@@ -40,8 +43,8 @@ services:
       - 6902:5900
 
   selenium-hub:
-    image: selenium/hub:4.0.0-beta-1-prerelease-20210114
     container_name: selenium-hub
+    image: selenium/hub:4.0.0-beta-1-prerelease-20210114
     mem_limit: 1024m
     ports:
       - 4442:4442
