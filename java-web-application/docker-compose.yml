@@ -1,0 +1,12 @@
+version: '2.3'
+services:
+
+  java-web-app: 
+    image: java-web-app
+    build:
+      context: .
+    container_name: java-web-app
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 8080:8080
