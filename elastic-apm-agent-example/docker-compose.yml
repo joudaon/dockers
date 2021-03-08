@@ -1,0 +1,68 @@
+version: '2.3'
+services:
+
+  java-web-app: 
+    image: java-web-app
+    build:
+      context: java-web-application
+    container_name: java-web-app
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - CATALINA_OPTS=-javaagent:/opt/elastic-apm-agent-1.21.0.jar -Delastic.apm.service_name=java-web-app -Delastic.apm.application_packages=main.java -Delastic.apm.server_url=http://apm-server:8200
+      - ELASTIC_APM_ENVIRONMENT=DEV
+
+  flask-server:
+    image: flask-server
+    build:
+      context: flask-server/
+    container_name: flask-server
+    hostname: flask-server
+    mem_limit: 1024m
+    restart: always
+    ports:
+      - 5000:5000
+    healthcheck:
+      test: ps aux | grep "flask run" | grep -v grep || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 5
+    environment:
+      - ELASTIC_APM_ENVIRONMENT=PRO
+
+  apm-server:
+    image: apm-server
+    build:
+      context: apm-server/
+    container_name: apm-server
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 8200:8200
+  
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.11.1
+    container_name: kibana
+    mem_limit: 2048m
+    restart: always
+    ports:
+      - 5601:5601
+  
+  elasticsearch:
+    image: elasticsearch
+    build:
+      context: elasticsearch/
+    container_name: elasticsearch
+    mem_limit: 2048m
+    restart: always
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks
+      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      discovery.type: single-node
+    ports:
+      - 9200:9200
+
