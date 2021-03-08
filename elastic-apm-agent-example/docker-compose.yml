@@ -30,7 +30,8 @@ services:
       timeout: 10s
       retries: 5
     environment:
-      - ELASTIC_APM_ENVIRONMENT=PRO
+      - ELASTIC_APM_SERVER_URL=http://apm-server:8200
+      - ELASTIC_APM_ENVIRONMENT=DEV
 
   apm-server:
     image: apm-server

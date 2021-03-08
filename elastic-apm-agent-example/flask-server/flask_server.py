@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, session, redirect, url_for, request
 from markupsafe import escape
 from elasticapm.contrib.flask import ElasticAPM
@@ -5,9 +7,7 @@ from elasticapm.contrib.flask import ElasticAPM
 app = Flask(__name__)
 
 app.config['ELASTIC_APM'] = {
-    'SERVICE_NAME': 'flask_server',
-    'SERVER_URL': 'http://apm-server:8200',
-    'LOG_FILE': '/var/log/elasticapm/log.txt',
+    'SERVICE_NAME': 'flask-server',
     'DEBUG': True
 }
 
