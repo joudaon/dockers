@@ -5,9 +5,9 @@ elastic-apm[flask]
 Flask==1.1.2
 idna==2.9
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 Pillow==8.1.1
-requests==2.23.0
-urllib3==1.25.9
+requests==2.25.1
+urllib3==1.26.5
 Werkzeug==1.0.1
