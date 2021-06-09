@@ -1,0 +1,12 @@
+version: '2.3'
+services:
+
+  apache2: 
+    image: httpd:latest
+    container_name: apache2
+    mem_limit: 2048m
+    restart: always
+    volumes:
+      - ./apache2/htdocs:/usr/local/apache2/htdocs
+    ports:
+      - 80:80
