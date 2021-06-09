@@ -1,8 +1,10 @@
 import flask
 import os
+import logging
 from flask import request, jsonify
 
 app = flask.Flask(__name__)
+app.logger.setLevel(logging.INFO)
 
 # Create some test data for our catalog in the form of a list of dictionaries.
 books = [
@@ -22,10 +24,10 @@ books = [
       'first_sentence': 'to wound the autumnal city.',
       'published': '1975'},
     {'id': 3,
-      'title': 'One step ahead Wall Street',
-      'author': 'Graham Bell',
-      'first_sentence': 'Do you wonder..',
-      'published': '1956'}
+      'title': 'One Up On Wall Street',
+      'author': 'Peter Lynch',
+      'first_sentence': 'Do you wonder',
+      'published': '2000'}
 ]
 
 
@@ -35,15 +37,17 @@ def home():
 <p>A prototype API for distant reading of science fiction novels.</p>'''
 
 # A route to return all of the available entries in our catalog.
-# # $> curl http://localhost:5000/api/v1/resources/books/all
+# $> curl http://localhost:5000/api/v1/resources/books/all
 @app.route('/api/v1/resources/books/all', methods=['GET'])
 def api_all():
+    app.logger.info("Getting all book catalog. Request from: {}".format(request.remote_addr))
     return jsonify(books)
 
 # A route to return one specific book.
-# # $> curl http://localhost:5000/api/v1/resources/books?id=1
+# $> curl http://localhost:5000/api/v1/resources/books?id=1
 @app.route('/api/v1/resources/books', methods=['GET'])
 def api_id():
+    app.logger.info("Getting a book from catalog. Request from: {}".format(request.remote_addr))
     # Check if an ID was provided as part of the URL.
     # If ID is provided, assign it to a variable.
     # If no ID is provided, display an error in the browser.
@@ -65,15 +69,16 @@ def api_id():
     # Python dictionaries to the JSON format.
     return jsonify(results)
 
-# A route to delete one specific book
-# # $> curl -X DELETE http://localhost:5000/api/v1/resources/books/delete?id=1
-@app.route('/api/v1/resources/books/delete', methods=['GET'])
+# A route to delete specific book
+# $> curl -X DELETE http://localhost:5000/api/v1/resources/books/delete?id=1
+@app.route('/api/v1/resources/books/delete', methods=['DELETE'])
 def api_id_delete():
     # Check if an ID was provided as part of the URL.
     # If ID is provided, assign it to a variable.
     # If no ID is provided, display an error in the browser.
     if 'id' in request.args:
         id = int(request.args['id'])
+        logging.warning("ID: {}".format(id))
     else:
         return "Error: No id field provided. Please specify an id."
 
@@ -90,5 +95,13 @@ def api_id_delete():
     # Use the jsonify function from Flask to convert our list of
     # Python dictionaries to the JSON format.
     return jsonify(results)
+
+# A route to add a new book
+# $> curl -d '{"id":4, "title":"One Up On Wall Street", "author":"Peter Lynch", "first_sentence":"Do you wonder", "published": "2000"}' -H "Content-Type: application/json" -X PUT http://localhost:5000/api/v1/resources/books/add
+@app.route('/api/v1/resources/books/add', methods=['PUT'])
+def api_id_add():
+    book = request.get_json()
+    books.append(book)
+    return jsonify(book)
 
 # app.run()
