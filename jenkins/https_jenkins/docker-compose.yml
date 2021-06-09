@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+  jenkins:
+    image: "jenkins/jenkins:lts"
+    user: root
+    expose:
+      - 8080
+    ports:
+      - 50000:50000
+    container_name: it-jenkins
+    volumes:
+      - ./jenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/local/bin/docker
+    networks:
+      - jenkins_nw
+    restart: unless-stopped
+
+  nginx:
+    image: "nginx:latest"
+    links:
+      - "jenkins"
+      - "jenkins:jenkinssvc"
+    ports:
+      - "80:80"
+      - "443:443"
+    container_name: it-nginx
+    volumes:
+      - ./certs:/etc/ssl
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - jenkins_nw
+    depends_on:
+      - jenkins
+    restart: unless-stopped
+
+networks:
+  jenkins_nw:
+    driver: bridge
