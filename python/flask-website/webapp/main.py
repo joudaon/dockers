@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, session
 from flask_bootstrap import Bootstrap
 import mysql.connector
 import os
@@ -14,6 +14,10 @@ mycursor = mydb.cursor()
 
 app = Flask(__name__)
 Bootstrap(app)
+
+# Secret key for sessions
+# https://flask.palletsprojects.com/en/2.0.x/quickstart/#sessions
+app.secret_key = 'mysecretkey'
 
 # Route with greeting
 @app.route('/hello/<name>', methods=['GET'])
@@ -37,14 +41,18 @@ def login():
     mydb.commit()
     mycursor.close()
     mydb.close()
+    session['username'] = request.form['username']
     return 'Successfully registered'
   return render_template('login.html')
 
-# Route with greeting
+# Test route
 @app.route('/test', methods=['GET'])
 def test():
-  fruits = ['orange, apple, mango']
-  return render_template('test.html', fruits=fruits)
+  # fruits = ['orange, apple, mango']
+  # return render_template('test.html', fruits=fruits)
+  if 'username' in session:
+    return f'Logged in as {session["username"]}'
+  return 'You are not logged in'
 
 if __name__ == '__main__':
   app.run(debug=True, port=5000)
