@@ -1,0 +1,52 @@
+version: '2.3'
+services:
+
+  # webapp:
+  #   image: webapp
+  #   build:
+  #     context: webapp/
+  #   container_name: webapp
+  #   hostname: webapp
+  #   mem_limit: 1024m
+  #   restart: always
+  #   ports:
+  #     - 5000:5000
+  #   environment:
+  #     MYSQL_HOST: mysql
+  #     MYSQL_USER: root
+  #     MYSQL_PASSWORD: password
+  #     MYSQL_DATABASE: website
+  #   depends_on:
+  #     mysql:
+  #       condition: service_healthy
+  #   healthcheck:
+  #     test: ps aux | grep "flask run" | grep -v grep || exit 1
+  #     interval: 20s
+  #     timeout: 10s
+  #     retries: 5
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    hostname: mysql
+    # user: mysql
+    mem_limit: 2048m
+    restart: always
+    environment:
+      MYSQL_DATABASE: website
+      # So you don't have to use root, but you can if you like
+      # MYSQL_USER: user
+      # You can use whatever password you like
+      MYSQL_PASSWORD: password
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      # - ./mysqldata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
