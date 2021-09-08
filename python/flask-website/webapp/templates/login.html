@@ -1,2 +1,15 @@
-<h1>Login!</h1>
-<p>Welcome!</p>
+{% extends 'base.html' %}
+    {% block body %}
+        <h1>Login!</h1>
+        <p>Welcome!</p>
+        <img src={{url_for('static', filename="sample_tree.jpg")}} height="250" width="250" />
+        <form method="post">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+             <label for="email">Enter your email:</label>
+            <input type="email" placeholder="Enter Email" id="email" name="email"> 
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    {% endblock %}

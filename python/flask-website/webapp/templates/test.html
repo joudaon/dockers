@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+    {% block body %}
+        <div class="jumbotron">
+            {% for fruit in fruits %}
+                {{ fruit }}
+            {% endfor %}
+            <button type="button" class="btn btn-primary">Button</button>
+        </div>
+    {% endblock %}
