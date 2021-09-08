@@ -16,3 +16,4 @@ pip3 freeze > requirements.txt
 - [Flask login example](https://github.com/shihanng/flask-login-example)
 - [Timing out the login session](https://riptutorial.com/flask/example/30387/timing--out-the-login-session)
 - [Is there an easy way to make sessions timeout in flask?](https://stackoverflow.com/questions/11783025/is-there-an-easy-way-to-make-sessions-timeout-in-flask)
+- [Login System with Python Flask and MySQL](https://codeshack.io/login-system-python-flask-mysql/)
