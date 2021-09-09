@@ -29,9 +29,9 @@ def add_name(name):
   mydb.close()
   return(greeting)
 
-# Route with greeting
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+# Route to register
+@app.route('/register', methods=['GET', 'POST'])
+def register():
   if request.method == 'POST':
     form = request.form
     username = form['username']
@@ -39,11 +39,37 @@ def login():
     password = form['password']
     mycursor.execute("""INSERT INTO user (username, email, password) VALUES (%s,%s,%s)""",(username,email,password))
     mydb.commit()
-    mycursor.close()
-    mydb.close()
-    session['username'] = request.form['username']
     return 'Successfully registered'
-  return render_template('login.html')
+  return render_template('register.html')
+
+# Route to register
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  # Output message if something goes wrong...
+  msg = ''
+  # Check if "username" and "password" POST requests exist (user submitted form)
+  if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
+      # Create variables for easy access
+      email = request.form['email']
+      password = request.form['password']
+      # Check if account exists using MySQL
+      mycursor.execute('SELECT id, username FROM user WHERE email = %s AND password = %s', (email, password,))
+      # Fetch one record and return result
+      account = mycursor.fetchone()
+      # If account exists in accounts table in out database
+      if account:
+        id = account[0]
+        username = account[1]
+        # Create session data, we can access this data in other routes
+        session['loggedin'] = True
+        session['id'] = id
+        session['username'] = username
+        # Redirect to home page
+        return 'Logged in successfully {}!'.format(username)
+      else:
+        # Account doesnt exist or username/password incorrect
+        msg = 'Incorrect username/password!'
+  return render_template('login.html', msg=msg)
 
 # Test route
 @app.route('/test', methods=['GET'])

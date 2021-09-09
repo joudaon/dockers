@@ -2,14 +2,24 @@
     {% block body %}
         <h1>Login!</h1>
         <p>Welcome!</p>
-        <img src={{url_for('static', filename="sample_tree.jpg")}} height="250" width="250" />
-        <form method="post">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
-             <label for="email">Enter your email:</label>
-            <input type="email" placeholder="Enter Email" id="email" name="email"> 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+        <form method='post'>
+            <div class="row mb-3">
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                <input type="email" class="form-control" id="email" name="email" placeholder="email@email.com" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+        {% if msg %}
+            <div class="alert alert-danger" role="alert">
+                {{ msg }}
+            </div>
+        {% endif %}
     {% endblock %}
