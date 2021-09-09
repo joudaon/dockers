@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
   gitlab-web:
-    image: gitlab/gitlab-ce:13.4.0-ce.0
+    image: gitlab/gitlab-ce:14.0.10-ce.0
     container_name: gitlab-web
     hostname: gitlab-web
     mem_limit: 2048m
@@ -22,6 +22,7 @@ services:
         external_url 'http://localhost'
         registry_external_url 'http://localhost:4567'
         registry['enable'] = true
+        nginx['client_max_body_size'] = '500m'
     logging:
       driver: "json-file"
       options:
@@ -31,7 +32,7 @@ services:
       - gitlab-network
 
   gitlab-runner1:
-    image: gitlab/gitlab-runner:ubuntu-v13.4.0
+    image: gitlab/gitlab-runner:ubuntu-v14.2.0
     container_name: gitlab-runner1
     hostname: gitlab-runner1
     mem_limit: 512m
@@ -48,7 +49,7 @@ services:
       - gitlab-network
 
   gitlab-runner2:
-    image: gitlab/gitlab-runner:ubuntu-v13.4.0
+    image: gitlab/gitlab-runner:ubuntu-v14.2.0
     container_name: gitlab-runner2
     hostname: gitlab-runner2
     mem_limit: 512m
