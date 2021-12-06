@@ -2,7 +2,7 @@
 
 ```bash
 # Create virtualenv
-virtualenv venv_flask
+virtualenv -p python3 venv_flask
 source venv_flask/bin/activate
 # Install requirements.txt file
 pip install -r /path/to/requirements.txt
