@@ -18,7 +18,8 @@ services:
       - 443:443
       - 50000:50000 #build executors port
     volumes:
-      - ./master/jenkins_home:/var/jenkins_home
+      # - ./master/jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       JAVA_OPTS: "-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"
     logging:
@@ -38,7 +39,7 @@ services:
     ports:
       - '2222:22'
     volumes:
-      - ./ssh-slave/home/jenkins:/home/jenkins
+      # - ./ssh-slave/home/jenkins:/home/jenkins
       - /var/run/docker.sock:/var/run/docker.sock
     # environment:
     #   SSH_KEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6CPOQDrq...faMvvidd+RVSfDBgJE1g3 jenkins@jenkins.company.tld"
