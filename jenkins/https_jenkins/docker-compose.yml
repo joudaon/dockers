@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   jenkins:
-    image: jenkins/jenkins:2.332.1-lts
+    image: jenkins/jenkins:2.346.1-lts
     container_name: it-jenkins
     mem_limit: 2048m
     restart: unless-stopped
