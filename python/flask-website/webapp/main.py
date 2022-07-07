@@ -1,7 +1,32 @@
 from flask import Flask, render_template, url_for, request, session
 from flask_bootstrap import Bootstrap
+from flask import request
 import mysql.connector
+import smtplib
 import os
+import logging
+from logging.handlers import RotatingFileHandler
+
+# Setup logging
+logging.basicConfig(
+  handlers=[RotatingFileHandler('./app.log', mode='a', maxBytes=10000000, backupCount=10)],
+  format='%(asctime)-5s - PID: %(process)d - %(levelname)-8s - In Module: %(module)s and File: %(filename)s [%(pathname)s:%(lineno)d]: %(message)s',
+  datefmt='%Y-%m-%d %H:%M:%S',
+  level=logging.INFO
+)
+# log = logging.getLogger('werkzeug')
+# log.setLevel(logging.INFO)
+
+
+# Get Environment Variables
+## smtp
+smtp_username = os.environ.get('SMTP_USERNAME') if os.environ.get('MYSQL_HOST') else 'test@gmail.com'
+smtp_password = os.environ.get('SMTP_PASSWORD') if os.environ.get('MYSQL_HOST') else 'password'
+smtp_host = os.environ.get('SMTP_HOST') if os.environ.get('MYSQL_HOST') else 'smtp.gmail.com'
+smtp_port = os.environ.get('SMTP_PORT') if os.environ.get('MYSQL_HOST') else '587'
+
+# Create smtp server
+smtpconn = smtplib.SMTP(smtp_host, smtp_port)
 
 mydb = mysql.connector.connect(
   host=os.environ.get('MYSQL_HOST') if os.environ.get('MYSQL_HOST') else 'localhost',
@@ -22,23 +47,35 @@ app.secret_key = 'mysecretkey'
 # Route with greeting
 @app.route('/hello/<name>', methods=['GET'])
 def add_name(name):
+  logging.info('Accessing from {}.'.format(request.remote_addr))
   greeting = 'Hello ' + name
-  mycursor.execute("""INSERT INTO user (email, password) VALUES (%s,%s)""",(name,'jonpass'))
-  mydb.commit()
-  mycursor.close()
-  mydb.close()
   return(greeting)
 
 # Route to register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
   if request.method == 'POST':
-    form = request.form
-    username = form['username']
-    email = form['email']
-    password = form['password']
-    mycursor.execute("""INSERT INTO user (username, email, password) VALUES (%s,%s,%s)""",(username,email,password))
-    mydb.commit()
+    try:
+      form = request.form
+      username = form['username']
+      email = form['email']
+      password = form['password']
+      mycursor.execute("""INSERT INTO user (username, email, password) VALUES (%s,%s,%s)""",(username,email,password))
+      mydb.commit()
+      # Send email
+      try:
+        smtpconn.ehlo()
+        smtpconn.starttls()
+        smtpconn.login(smtp_username, smtp_password)
+        smtpconn.sendmail(smtp_username, email, 'Subject: Welcome to the website!\n\nWelcome to the website {}!'.format(username))
+        smtpconn.quit()
+        mycursor.close()
+      except:
+        logging.error('ERROR: Unable to send email')
+      logging.info('User {} registered'.format(username))
+    except:
+      logging.error('ERROR: unable to register user')
+      return 'ERROR: unable to register user'
     return 'Successfully registered'
   return render_template('register.html')
 

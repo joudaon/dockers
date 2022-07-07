@@ -2,7 +2,7 @@ version: '2.3'
 services:
 
   jenkins:
-    image: jenkins/jenkins:2.277.1-lts
+    image: jenkins/jenkins:2.332.1-lts
     container_name: jenkins
     mem_limit: 2048m
     restart: always
@@ -11,7 +11,7 @@ services:
       - 443:443
       - 50000:50000 #build executors port
     volumes:
-      - ./jenkins_home:/var/jenkins_home
+      # - ./jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       JAVA_OPTS: "-Djava.awt.headless=true"
